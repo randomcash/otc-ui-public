@@ -24,7 +24,6 @@ import { formatCurrency, formatToRawLocaleStr } from '@/utils/numberish/formatte
 import dayjs from 'dayjs'
 
 import SwapMobileIcon from '@/icons/misc/SwapMobileIcon'
-import TVChart from '@/components/TradingView/TVChart'
 import { solToWSolToken } from '@/utils/token'
 
 function SwapKlinePanelMobileDrawerContent({
@@ -118,13 +117,6 @@ function SwapKlinePanelMobileDrawerContent({
                 </Text>
               </HStack>
             </GridItem> */}
-            <TVChart
-              id="swap-mobile-tv-chart"
-              height="100%"
-              birdeye
-              poolId={`${baseToken ? solToWSolToken(baseToken).address : ''}_${quoteToken ? solToWSolToken(quoteToken).address : ''}`}
-              mintBInfo={quoteToken}
-            />
             {/* <CandleChart untilDate={untilDate} onPriceChange={setPrice} baseMint={baseToken} quoteMint={quoteToken} timeType={timeType} /> */}
           </Grid>
         </GridItem>

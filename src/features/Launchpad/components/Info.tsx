@@ -18,7 +18,6 @@ import { HelpCircle } from 'react-feather'
 import CircleCheck from '@/icons/misc/CircleCheck'
 import CopyLaunchpadIcon from '@/icons/misc/CopyLaunchpadIcon'
 import { encodeStr } from '@/utils/common'
-import { addPoolListener, removePoolListener } from '@/components/TradingView/streaming'
 import { Curve, LaunchpadPoolInfo } from '@raydium-io/raydium-sdk-v2'
 import dayjs from 'dayjs'
 import { CurveLineChart, Point } from './Charts/CurveLineChart'
@@ -150,8 +149,6 @@ export default function Info({
       setFinishRate(new Decimal(finishingRate * 100).toDecimalPlaces(2).toNumber())
       generatePoints({ poolInfo, mintInfo })
     }
-    addPoolListener(mintInfo.poolId, cbk)
-    return () => removePoolListener(mintInfo.poolId, cbk)
   }, [mintInfo?.poolId, mintBPrice])
 
   useEffect(() => {

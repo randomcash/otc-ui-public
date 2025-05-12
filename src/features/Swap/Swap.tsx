@@ -25,7 +25,6 @@ import Tooltip from '@/components/Tooltip'
 import { MoonpayBuy } from '@/components/Moonpay'
 import { toastSubject } from '@/hooks/toast/useGlobalToast'
 import useResponsive from '@/hooks/useResponsive'
-import TVChart from '@/components/TradingView/TVChart'
 import TokenAvatarPair from '@/components/TokenAvatarPair'
 import SwapIcon from '@/icons/misc/SwapIcon'
 import dayjs from 'dayjs'
@@ -224,13 +223,6 @@ export default function Swap() {
                 </Text>
               </HStack>
             </HStack>
-            <TVChart
-              id="swap-tv-chart"
-              height="100%"
-              birdeye
-              poolId={`${baseToken ? solToWSolToken(baseToken).address : ''}_${quoteToken ? solToWSolToken(quoteToken).address : ''}`}
-              mintBInfo={quoteToken}
-            />
             {/* <SwapKlinePanel
               untilDate={untilDate.current}
               baseToken={baseToken}

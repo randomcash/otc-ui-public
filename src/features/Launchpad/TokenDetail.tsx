@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import { Box, Grid, GridItem, Flex, Text, Button, Avatar, Link, useColorMode, useToast, Image } from '@chakra-ui/react'
 import { Trans, useTranslation } from 'react-i18next'
 import { colors } from '@/theme/cssVariables/colors'
-import TVChart from '@/components/TradingView/TVChart'
 import ChevronLeftIcon from '@/icons/misc/ChevronLeftIcon'
 import CommentIcon from '@/icons/misc/CommentIcon'
 import Tabs from '@/components/Tabs'
@@ -27,7 +26,6 @@ import { formatCurrency } from '@/utils/numberish/formatter'
 import useTokenPrice from '@/hooks/token/useTokenPrice'
 import Decimal from 'decimal.js'
 import { createTimeDiff, useReferrerQuery } from './utils'
-import { addPoolListener, removePoolListener } from '@/components/TradingView/streaming'
 import NextLink from 'next/link'
 import { wsolToSolToken } from '@/utils/token'
 import { ToLaunchPadConfig } from '@/hooks/launchpad/utils'
@@ -286,8 +284,6 @@ const TokenDetail = () => {
   useEffect(() => {
     if (!poolId) return
     const cbk = (data: LaunchpadPoolInfo) => setPoolState(data.status)
-    addPoolListener(poolId, cbk)
-    return () => removePoolListener(poolId, cbk)
   }, [poolId])
 
   const handleHideGraduatedBanner = useCallback(
@@ -475,16 +471,6 @@ const TokenDetail = () => {
             </Text>
           </Flex>
         )}
-      </GridItem>
-      <GridItem gridArea="chart">
-        <TVChart
-          poolId={isLanded && mintInfo ? `${mintInfo.mint}_${mintB}` : poolId}
-          birdeye={mintInfo && isLanded}
-          mintInfo={mintInfo}
-          mintBInfo={mintBInfo}
-          curveType={configInfo?.curveType}
-          needRefresh={needCheckMint}
-        />
       </GridItem>
       <GridItem
         gridArea="tabs"

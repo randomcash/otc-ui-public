@@ -22,7 +22,6 @@ import {
 } from '@raydium-io/raydium-sdk-v2'
 import axios from '@/api/axios'
 import { MintInfo } from '@/features/Launchpad/type'
-import { refreshChartSubject } from '@/components/TradingView/TVChart'
 import { LaunchpadConfigInfo } from '@/hooks/launchpad/usePoolRpcInfo'
 import { useTokenAccountStore } from './useTokenAccountStore'
 import { getDefaultToastData, handleMultiTxToast } from '@/hooks/toast/multiToastUtil'
@@ -404,7 +403,7 @@ export const useLaunchpadStore = createStore<LaunchpadState>((set, get) => ({
             useTokenAccountStore.getState().fetchTokenAccountAct({})
             setTimeout(() => {
               set({ refreshPoolMint: mint })
-              refreshChartSubject.next(mint)
+              //refreshChartSubject.next(mint)
             }, 1000)
           }
         })
@@ -423,7 +422,7 @@ export const useLaunchpadStore = createStore<LaunchpadState>((set, get) => ({
           useTokenAccountStore.getState().fetchTokenAccountAct({})
           setTimeout(() => {
             set({ refreshPoolMint: mint })
-            refreshChartSubject.next(mint)
+            //refreshChartSubject.next(mint)
           }, 1000)
         }
       })
