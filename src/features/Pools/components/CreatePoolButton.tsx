@@ -7,7 +7,7 @@ import { CreatePoolEntryDialog } from '@/features/Create/components/CreatePoolEn
 import PlusIcon from '@/icons/misc/PlusIcon'
 import { colors } from '@/theme/cssVariables'
 
-export type PoolType = 'standard' | 'concentrated'
+export type PoolType = 'standard'
 
 export default function CreatePoolButton() {
   const { isOpen, onOpen, onClose } = useDisclosure()

@@ -84,7 +84,7 @@ export default function CreatePosition() {
     mutate
   } = useFetchPoolById<ApiV3PoolInfoConcentratedItem>({
     idList: [fetchPoolId],
-    type: PoolFetchType.Concentrated,
+    type: PoolFetchType.Standard,
     refreshInterval: 3 * 60 * 1000
   })
   const clmmData = formattedData?.[0]
@@ -111,8 +111,8 @@ export default function CreatePosition() {
 
   const birdeyePoolPrice = hasBirdPrice
     ? new Decimal(birdeyePrice[currentPool!.mintA.address || '']?.value ?? 0).div(
-        birdeyePrice[currentPool!.mintB.address || '']?.value ?? 1
-      )
+      birdeyePrice[currentPool!.mintB.address || '']?.value ?? 1
+    )
     : new Decimal(0)
 
   const tickPriceRef = useRef<{ tickLower?: number; tickUpper?: number; priceLower?: string; priceUpper?: string; liquidity?: BN }>({})

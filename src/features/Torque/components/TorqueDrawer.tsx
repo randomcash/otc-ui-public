@@ -33,7 +33,7 @@ interface Props {
   error: string | null
 }
 
-const TABS = ['Claim', 'Redacted'] as const
+const TABS = ['Claim'] as const
 type TabEnum = typeof TABS[number]
 
 export default function TorqueDrawer({ isOpen, onClose, offers, handleClaimOffer, loading, error }: Props) {
@@ -89,7 +89,6 @@ export default function TorqueDrawer({ isOpen, onClose, offers, handleClaimOffer
   return (
     <Wrapper isOpen={isOpen} onClose={onClose} setSelectedTab={setSelectedTab} selectedTab={selectedTab}>
       {selectedTab === 'Claim' && <TorqueClaimRewards offers={offers} claimOffer={handleClaimOffer} />}
-      {selectedTab === 'Redacted' && <TorqueComingSoon />}
     </Wrapper>
   )
 }

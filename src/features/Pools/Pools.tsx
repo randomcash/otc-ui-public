@@ -64,7 +64,7 @@ import { urlToMint, mintToUrl } from '@/utils/token'
 export type PoolPageQuery = {
   token?: string
   search?: string
-  tab?: 'concentrated' | 'standard' | 'all'
+  tab?: 'standard' | 'all'
   layout?: 'list' | 'grid'
 }
 
@@ -129,11 +129,6 @@ export default function Pools() {
   const isMobile = useAppStore((s) => s.isMobile)
 
   const tabItems: PoolTabItem[] = [
-    {
-      name: 'Concentrated',
-      label: isEN && isMobile ? 'CLMM' : t('liquidity.concentrated'),
-      value: PoolFetchType.Concentrated
-    },
     {
       name: 'Standard',
       label: isEN && isMobile ? 'STANDARD' : t('liquidity.standard'),
@@ -292,7 +287,7 @@ export default function Pools() {
   const data = hasSearch || searchIdData?.length ? searchData : orgData
   const isLoading = hasSearch ? isSearchLoading : isOrgLoading
   const isLoadEnded = hasSearch ? isSearchLoadEnded : isOrgLoadedEnd
-  const loadMore = hasSearch ? () => {} : orgLoadMore
+  const loadMore = hasSearch ? () => { } : orgLoadMore
   const sortedData = useMemo(() => {
     // if (!favoritePools.size) return data
     const favorite: FormattedPoolInfoItem[] = []

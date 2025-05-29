@@ -1,7 +1,4 @@
 import { useDisclosure } from '@/hooks/useDelayDisclosure'
-import RaydiumLogo from '@/icons/RaydiumLogo'
-import RaydiumLogoOutline from '@/icons/RaydiumLogoOutline'
-import ChevronDownIcon from '@/icons/misc/ChevronDownIcon'
 import Gear from '@/icons/misc/Gear'
 import { useAppStore } from '@/store'
 import { colors } from '@/theme/cssVariables'
@@ -73,26 +70,19 @@ function AppNavLayout({
         {/* logo */}
         <Desktop>
           <Box flex={'none'}>
-            <Link href="/swap">
-              <RaydiumLogo />
-            </Link>
+            <Link href="/swap" />
           </Box>
         </Desktop>
         <Mobile>
           <HStack>
-            <RaydiumLogoOutline />
             <Text fontSize="xl" fontWeight="medium" color={colors.textSecondary}>
               {pathname === '/swap'
                 ? t('swap.title')
                 : pathname === '/liquidity-pools'
-                ? t('liquidity.title')
-                : pathname === '/portfolio'
-                ? t('portfolio.title')
-                : pathname === '/playground'
-                ? t('common.playground')
-                : pathname === '/staking'
-                ? t('staking.title')
-                : ''}
+                  ? t('liquidity.title')
+                  : pathname === '/portfolio'
+                    ? t('portfolio.title')
+                    : ''}
             </Text>
           </HStack>
         </Mobile>
@@ -103,25 +93,11 @@ function AppNavLayout({
             <RouteLink href="/swap" isActive={pathname === '/swap'} title={t('swap.title')} />
             <RouteLink href="/liquidity-pools" isActive={pathname.includes('/liquidity')} title={t('liquidity.title')} />
             <RouteLink href="/portfolio" isActive={pathname === '/portfolio'} title={t('portfolio.title')} />
-            <Menu size="lg">
-              <MenuButton fontSize={'lg'} px={4} py={2}>
-                <Flex
-                  align="center"
-                  gap={0.5}
-                  color={pathname === '/staking' || pathname === '/bridge' ? colors.textSecondary : colors.textTertiary}
-                >
-                  {pathname === '/staking' ? t('staking.title') : pathname === '/bridge' ? t('bridge.title') : t('common.more')}
-                  <ChevronDownIcon width={16} height={16} />
-                </Flex>
-              </MenuButton>
-              <NavMoreButtonMenuPanel />
-            </Menu>
           </HStack>
         </Desktop>
 
         {/* wallet button */}
         <Flex gap={[0.5, 2]} align="center">
-          <TorqueButton />
           <PriorityButton />
           <SettingsMenu />
           {/* <EVMWallet />  don't need currently yet*/}
@@ -179,9 +155,9 @@ function RouteLink({
       shallow
       {...(external
         ? {
-            target: '_blank',
-            rel: 'noopener noreferrer'
-          }
+          target: '_blank',
+          rel: 'noopener noreferrer'
+        }
         : {})}
     >
       <Flex
@@ -242,9 +218,8 @@ function SettingsMenuModalContent(props: { isOpen: boolean; triggerRef: React.Re
             const triggerRect = getTriggerRect()
             return (
               triggerRect
-                ? `translate(${isMobile ? 0 : -(window.innerWidth - triggerRect.right)}px, ${
-                    triggerRect.bottom + triggerPanelGap
-                  }px) !important`
+                ? `translate(${isMobile ? 0 : -(window.innerWidth - triggerRect.right)}px, ${triggerRect.bottom + triggerPanelGap
+                }px) !important`
                 : undefined
             ) as string | undefined
           })()

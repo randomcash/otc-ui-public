@@ -60,7 +60,7 @@ export default function CreateFarm() {
   const owner = useAppStore((s) => s.publicKey)
 
   // -------- step 1 --------
-  const [selectedPoolType, setSelectedPoolType] = useState<CreateFarmType>('Concentrated')
+  const [selectedPoolType, setSelectedPoolType] = useState<CreateFarmType>('Standard')
   const [selectedPool, setSelectedPool] = useState<ApiV3PoolInfoItem | undefined>()
 
   // -------- step 2 --------
@@ -195,7 +195,7 @@ export default function CreateFarm() {
   useEffect(() => {
     if (defaultPool) {
       setSelectedPool(defaultPool)
-      setSelectedPoolType(defaultPool.type)
+      setSelectedPoolType("Standard")
     }
   }, [defaultPool?.id])
 
@@ -214,17 +214,17 @@ export default function CreateFarm() {
           "back word " auto
           "step panel" auto
           "note panel" 1fr / ${genCSS2GridTemplateColumns({
-            rightLeft: 344,
-            center: currentStep === 'select' ? 520 : currentStep === 'reward' ? 598 : 735
-          })}
+          rightLeft: 344,
+          center: currentStep === 'select' ? 520 : currentStep === 'reward' ? 598 : 735
+        })}
         `,
         `
           "back word  ." auto
           "step panel ." auto
           "note panel ." 1fr / ${genCSS3GridTemplateColumns({
-            rightLeft: 344,
-            center: currentStep === 'select' ? 520 : currentStep === 'reward' ? 598 : 735
-          })}
+          rightLeft: 344,
+          center: currentStep === 'select' ? 520 : currentStep === 'reward' ? 598 : 735
+        })}
         `
       ]}
       columnGap={[
@@ -232,8 +232,8 @@ export default function CreateFarm() {
         currentStep === 'select'
           ? 'clamp(120px / 5, 8.33vw, 120px * 3)' // 8.33vw = calc(120px / 1440px * 100vw)
           : currentStep === 'reward'
-          ? 'clamp(92px / 5, 6.39vw, 92px * 3)' // 6.39vw = calc(92px / 1440px * 100vw)
-          : 'clamp(56px / 5, 3.89vw, 56px * 3)' // 3.89vw = calc(56px / 1440px * 100vw)
+            ? 'clamp(92px / 5, 6.39vw, 92px * 3)' // 6.39vw = calc(92px / 1440px * 100vw)
+            : 'clamp(56px / 5, 3.89vw, 56px * 3)' // 3.89vw = calc(56px / 1440px * 100vw)
       ]}
       rowGap={[4, 4]}
       mt={[2, 8]}
@@ -311,12 +311,7 @@ export default function CreateFarm() {
               align="center"
               onClick={addANewRewardInfo}
               color={colors.secondary}
-              sx={
-                (selectedPoolType == 'Concentrated' && rewardInfos.length >= 2) ||
-                (selectedPoolType == 'Standard' && rewardInfos.length >= 5)
-                  ? { opacity: 0.5, pointerEvents: 'none' }
-                  : { cursor: 'pointer' }
-              }
+              sx={{ cursor: 'pointer' }}
             >
               <PlusCircleIcon width="14px" height="14px" />
               <Text fontSize="16px" fontWeight="500">
@@ -349,7 +344,7 @@ export default function CreateFarm() {
             />
           ) : currentStep === 'reward' ? (
             <RewardAddItem
-              maxRewardCount={selectedPoolType === 'Concentrated' ? 2 : 5}
+              maxRewardCount={selectedPoolType === 'Standard' ? 2 : 5}
               rewardInfos={rewardInfos}
               onRewardInfoChange={onRewardInfoChange}
               onAddAnotherReward={addANewRewardInfo}

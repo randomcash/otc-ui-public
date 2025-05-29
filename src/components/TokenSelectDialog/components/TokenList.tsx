@@ -120,7 +120,7 @@ export default forwardRef<
   useEffect(() => {
     customTokenInfo.current = {}
     if (!newToken) return
-    setExtraTokenListAct({ token: newToken, addToStorage: newToken.type === 'raydium' || newToken.type === 'jupiter' })
+    setExtraTokenListAct({ token: newToken, addToStorage: newToken.type === 'Rbx' || newToken.type === 'jupiter' })
   }, [newToken, setExtraTokenListAct])
 
   const showMoreData = useEvent(() => {

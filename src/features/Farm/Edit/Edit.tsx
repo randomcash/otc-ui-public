@@ -86,22 +86,22 @@ export default function FarmEdit() {
     shouldFetch: !!farmData && farmData.programId === FARM_PROGRAM_ID_V6.toBase58(),
     farmInfo: farmData
       ? {
-          programId: farmData.programId,
-          id: farmData.id
-        }
+        programId: farmData.programId,
+        id: farmData.id
+      }
       : undefined
   })
 
   const farmV6OwnerRemainingRewards =
     owner && rpcFarm && (rpcFarm as FarmStateV6)?.creator.equals(owner)
       ? ((rpcFarm?.rewardInfos || []) as FarmStateV6['rewardInfos'])
-          .filter((r) => !r.rewardEndTime.isZero() && r.rewardEndTime.toNumber() * 1000 < onlineCurrentDate)
-          .filter((r) => r.totalReward.sub(r.totalRewardEmissioned).gt(new BN(0)))
-          .map((r) => ({
-            hasRemaining: true,
-            mint: r.rewardMint.toBase58(),
-            remaining: r.totalReward.sub(r.totalRewardEmissioned).toString()
-          }))
+        .filter((r) => !r.rewardEndTime.isZero() && r.rewardEndTime.toNumber() * 1000 < onlineCurrentDate)
+        .filter((r) => r.totalReward.sub(r.totalRewardEmissioned).gt(new BN(0)))
+        .map((r) => ({
+          hasRemaining: true,
+          mint: r.rewardMint.toBase58(),
+          remaining: r.totalReward.sub(r.totalRewardEmissioned).toString()
+        }))
       : []
 
   const { ownerRemainingRewards, mutate: mutateClmmInfo } = useFetchRpcClmmInfo({
@@ -112,7 +112,7 @@ export default function FarmEdit() {
 
   const isLoading = isFarmLoading || isPoolLoading
   const hasData = (farmId && !!farmData) || (clmmId && clmmData)
-  const isValidData = farmData ? farmData.version === 6 : clmmData ? clmmData.type === 'Concentrated' : false
+  const isValidData = farmData ? farmData.version === 6 : clmmData ? true : false
   const availableRewardCount = farmData ? 5 : clmmData ? 2 : 0
 
   const [token1, token2] = [farmData?.symbolMints[0] || clmmData?.mintA, farmData?.symbolMints[1] || clmmData?.mintB]
@@ -127,12 +127,12 @@ export default function FarmEdit() {
   const rewardData = farmData
     ? farmData.formattedRewardInfos.map(farmV6RewardToEditReward)
     : clmmData
-    ? clmmData.formattedRewardInfos.map(poolRewardToEditReward)
-    : []
+      ? clmmData.formattedRewardInfos.map(poolRewardToEditReward)
+      : []
 
   const [flag, setFlag] = useState<number>(0)
   const editedRewardRef = useRef({ getRewards: () => [] as EditReward[] })
-  const newRewardRef = useRef({ getRewards: () => [] as EditReward[], addNewReward: (_: EditReward) => {} })
+  const newRewardRef = useRef({ getRewards: () => [] as EditReward[], addNewReward: (_: EditReward) => { } })
 
   const hasRewardsData = editedRewardRef.current?.getRewards().length || newRewardRef.current?.getRewards().length
 

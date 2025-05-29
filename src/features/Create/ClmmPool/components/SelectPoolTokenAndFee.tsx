@@ -64,7 +64,7 @@ export default function SelectPoolTokenAndFee({ completed, initState, show, isLo
     shouldFetch: !!token1 && !!token2,
     mint1: token1 ? solToWSol(token1.address).toString() : '',
     mint2: token2 ? solToWSol(token2.address || '').toString() : '',
-    type: PoolFetchType.Concentrated
+    type: PoolFetchType.Standard
   })
 
   const existingPools: Map<string, string> = useMemo(
@@ -80,7 +80,7 @@ export default function SelectPoolTokenAndFee({ completed, initState, show, isLo
             (pool.mintA?.address === token2Mint && pool.mintB?.address === token1Mint)
           )
         })
-        .reduce((acc, cur) => acc.set(cur.id, cur.config.id), new Map()),
+        .reduce((acc, cur) => acc.set(cur.id, cur.configId), new Map()),
     [token1?.address, token2?.address, data]
   )
 

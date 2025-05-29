@@ -445,20 +445,7 @@ export default function PoolListItem({
                     <Text fontSize="sm" color={colors.textSecondary}>
                       {t('field.fee_tier')}
                     </Text>
-                    <Tooltip
-                      label={
-                        <Flex maxW="216px">
-                          <Text color={colors.textSecondary} fontSize="sm">
-                            <Highlight query="concentrated" styles={{ fontWeight: '700', color: `${colors.textSecondary}` }}>
-                              {t('liquidity.pool_fee_desc', {
-                                feeRate: formatToRawLocaleStr(pool.feeRate * 100),
-                                type: t(`liquidity.${pool.type}`)
-                              }) || 'liquidity.pool_fee_desc'}
-                            </Highlight>
-                          </Text>
-                        </Flex>
-                      }
-                    >
+                    <Tooltip>
                       <Tag size="sm" variant="rounded">
                         {formatToRawLocaleStr(toPercentString(pool.feeRate * 100))}
                       </Tag>

@@ -84,7 +84,7 @@ function TabExample() {
       <Tabs
         items={[
           { value: 'loooooooooooooooooooooooooooooong', label: 'loooooooooooooooooooooooooooooong' },
-          { value: 'Raydium', label: 'Raydium' },
+          { value: 'Rbx', label: 'Rbx' },
           { value: 'Fusion', label: 'Fusion' },
           { value: 'Inactive', label: 'Inactive' }
         ]}
@@ -94,7 +94,7 @@ function TabExample() {
       <Tabs
         items={[
           { value: 'loooooooooooooooooooooooooooooong', label: 'loooooooooooooooooooooooooooooong' },
-          { value: 'Raydium', label: 'Raydium' },
+          { value: 'Rbx', label: 'Rbx' },
           { value: 'Fusion', label: 'Fusion' },
           { value: 'Inactive', label: 'Inactive' }
         ]}
@@ -104,7 +104,7 @@ function TabExample() {
       <Tabs
         items={[
           { value: 'loooooooooooooooooooooooooooooong', label: 'loooooooooooooooooooooooooooooong' },
-          { value: 'Raydium', label: 'Raydium' },
+          { value: 'Rbx', label: 'Rbx
           { value: 'Fusion', label: 'Fusion' },
           { value: 'Inactive', label: 'Inactive' }
         ]}
@@ -116,7 +116,7 @@ function TabExample() {
       <Tabs
         items={[
           { value: 'loooooooooooooooooooooooooooooong', label: 'loooooooooooooooooooooooooooooong' },
-          { value: 'Raydium', label: 'Raydium' },
+          { value: 'Rbx', label: 'Rbx' },
           { value: 'Fusion', label: 'Fusion' },
           { value: 'Inactive', label: 'Inactive' }
         ]}
@@ -126,7 +126,7 @@ function TabExample() {
       <Tabs
         items={[
           { value: 'loooooooooooooooooooooooooooooong', label: 'loooooooooooooooooooooooooooooong' },
-          { value: 'Raydium', label: 'Raydium' },
+          { value: 'Rbx', label: 'Rbx' },
           { value: 'Fusion', label: 'Fusion' },
           { value: 'Inactive', label: 'Inactive' }
         ]}
@@ -136,7 +136,7 @@ function TabExample() {
       <Tabs
         items={[
           { value: 'loooooooooooooooooooooooooooooong', label: 'loooooooooooooooooooooooooooooong' },
-          { value: 'Raydium', label: 'Raydium' },
+          { value: 'Rbx', label: 'Rbx' },
           { value: 'Fusion', label: 'Fusion' },
           { value: 'Inactive', label: 'Inactive' }
         ]}
@@ -148,7 +148,7 @@ function TabExample() {
       <Tabs
         items={[
           { value: 'loooooooooooooooooooooooooooooong', label: 'loooooooooooooooooooooooooooooong' },
-          { value: 'Raydium', label: 'Raydium' },
+          { value: 'Rbx', label: 'Rbx' },
           { value: 'Fusion', label: 'Fusion' },
           { value: 'Inactive', label: 'Inactive' }
         ]}
@@ -158,7 +158,7 @@ function TabExample() {
       <Tabs
         items={[
           { value: 'loooooooooooooooooooooooooooooong', label: 'loooooooooooooooooooooooooooooong' },
-          { value: 'Raydium', label: 'Raydium' },
+          { value: 'Rbx', label: 'Rbx' },
           { value: 'Fusion', label: 'Fusion' },
           { value: 'Inactive', label: 'Inactive' }
         ]}
@@ -168,7 +168,7 @@ function TabExample() {
       <Tabs
         items={[
           { value: 'loooooooooooooooooooooooooooooong', label: 'loooooooooooooooooooooooooooooong' },
-          { value: 'Raydium', label: 'Raydium' },
+          { value: 'Rbx', label: 'Rbx' },
           { value: 'Fusion', label: 'Fusion' },
           { value: 'Inactive', label: 'Inactive' }
         ]}
@@ -180,7 +180,7 @@ function TabExample() {
       <Tabs
         items={[
           { value: 'loooooooooooooooooooooooooooooong', label: 'loooooooooooooooooooooooooooooong' },
-          { value: 'Raydium', label: 'Raydium' },
+          { value: 'Rbx', label: 'Rbx' },
           { value: 'Fusion', label: 'Fusion' },
           { value: 'Inactive', label: 'Inactive' }
         ]}
@@ -192,7 +192,7 @@ function TabExample() {
       <Tabs
         items={[
           { value: 'loooooooooooooooooooooooooooooong', label: 'loooooooooooooooooooooooooooooong' },
-          { value: 'Raydium', label: 'Raydium' },
+          { value: 'Rbx', label: 'Rbx' },
           { value: 'Fusion', label: 'Fusion' },
           { value: 'Inactive', label: 'Inactive' }
         ]}
@@ -202,7 +202,7 @@ function TabExample() {
       <Tabs
         items={[
           { value: 'loooooooooooooooooooooooooooooong', label: 'loooooooooooooooooooooooooooooong' },
-          { value: 'Raydium', label: 'Raydium' },
+          { value: 'Rbx', label: 'Rbx' },
           { value: 'Fusion', label: 'Fusion' },
           { value: 'Inactive', label: 'Inactive' }
         ]}
@@ -212,7 +212,7 @@ function TabExample() {
       <Tabs
         items={[
           { value: 'loooooooooooooooooooooooooooooong', label: 'loooooooooooooooooooooooooooooong' },
-          { value: 'Raydium', label: 'Raydium' },
+          { value: 'Rbx', label: 'Rbx' },
           { value: 'Fusion', label: 'Fusion' },
           { value: 'Inactive', label: 'Inactive' }
         ]}
@@ -224,7 +224,7 @@ function TabExample() {
       <Tabs
         items={[
           { value: 'loooooooooooooooooooooooooooooong', label: 'loooooooooooooooooooooooooooooong' },
-          { value: 'Raydium', label: 'Raydium' },
+          { value: 'Rbx', label: 'Rbx' },
           { value: 'Fusion', label: 'Fusion' },
           { value: 'Inactive', label: 'Inactive' }
         ]}
@@ -234,7 +234,7 @@ function TabExample() {
       <Tabs
         items={[
           { value: 'loooooooooooooooooooooooooooooong', label: 'loooooooooooooooooooooooooooooong' },
-          { value: 'Raydium', label: 'Raydium' },
+          { value: 'Rbx', label: 'Rbx' },
           { value: 'Fusion', label: 'Fusion' },
           { value: 'Inactive', label: 'Inactive' }
         ]}
@@ -244,7 +244,7 @@ function TabExample() {
       <Tabs
         items={[
           { value: 'loooooooooooooooooooooooooooooong', label: 'loooooooooooooooooooooooooooooong' },
-          { value: 'Raydium', label: 'Raydium' },
+          { value: 'Rbx', label: 'Rbx' },
           { value: 'Fusion', label: 'Fusion' },
           { value: 'Inactive', label: 'Inactive' }
         ]}
@@ -284,7 +284,7 @@ function TabExample() {
           isFitted
           items={[
             { value: 'loooooooooooooooooooooooooooooong', label: 'loooooooooooooooooooooooooooooong' },
-            { value: 'Raydium', label: 'Raydium' },
+            { value: 'Rbx', label: 'Rbx' },
             { value: 'Fusion', label: 'Fusion' },
             { value: 'Inactive', label: 'Inactive' }
           ]}
@@ -295,7 +295,7 @@ function TabExample() {
           isFitted
           items={[
             { value: 'loooooooooooooooooooooooooooooong', label: 'loooooooooooooooooooooooooooooong' },
-            { value: 'Raydium', label: 'Raydium' },
+            { value: 'Rbx', label: 'Rbx' },
             { value: 'Fusion', label: 'Fusion' },
             { value: 'Inactive', label: 'Inactive' }
           ]}
@@ -306,7 +306,7 @@ function TabExample() {
           isFitted
           items={[
             { value: 'loooooooooooooooooooooooooooooong', label: 'loooooooooooooooooooooooooooooong' },
-            { value: 'Raydium', label: 'Raydium' },
+            { value: 'Rbx', label: 'Rbx' },
             { value: 'Fusion', label: 'Fusion' },
             { value: 'Inactive', label: 'Inactive' }
           ]}

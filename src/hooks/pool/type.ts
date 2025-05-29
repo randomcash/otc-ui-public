@@ -77,14 +77,6 @@ export type ConditionalPoolType<T> = T extends ApiV3PoolInfoStandardItem
   ? FormattedPoolInfoConcentratedItem
   : FormattedPoolInfoItem
 
-export type ReturnPoolType<T> = T extends typeof PoolFetchType.Standard
-  ? ApiV3PoolInfoStandardItem
-  : T extends typeof PoolFetchType.Concentrated
-  ? ApiV3PoolInfoConcentratedItem
-  : ApiV3PoolInfoItem
+export type ReturnPoolType<T> = ApiV3PoolInfoStandardItem
 
-export type ReturnFormattedPoolType<T> = T extends typeof PoolFetchType.Standard
-  ? FormattedPoolInfoStandardItem
-  : T extends typeof PoolFetchType.Concentrated
-  ? FormattedPoolInfoConcentratedItem
-  : FormattedPoolInfoItem
+export type ReturnFormattedPoolType<T> = FormattedPoolInfoStandardItem

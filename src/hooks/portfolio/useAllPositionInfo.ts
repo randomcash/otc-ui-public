@@ -37,7 +37,7 @@ export type PositionWithUpdateFn = ClmmPosition & {
 }
 export type ClmmDataWithUpdateFn = Map<string, PositionWithUpdateFn[]>
 
-export type PositionTabValues = 'concentrated' | 'standard' | 'staked RAY'
+export type PositionTabValues = 'standard'
 
 export default function useAllPositionInfo({ shouldFetch = true }: { shouldFetch?: boolean }) {
   const harvestAllFarmAct = useFarmStore((s) => s.harvestAllAct)
@@ -259,16 +259,6 @@ export default function useAllPositionInfo({ shouldFetch = true }: { shouldFetch
       rewardInfo: RewardInfo[]
     }
   > = {
-    concentrated: {
-      isReady: allClmmPending.gt(0) || Array.from(clmmPendingYield.current.values()).some((d) => !d.isEmpty),
-      pendingReward: allClmmPending.toFixed(10),
-      rewardInfo: Array.from(clmmRewardInfo.values())
-    },
-    'staked RAY': {
-      isReady: hasStakingReward,
-      pendingReward: allStakingPendingReward.toFixed(10),
-      rewardInfo: Array.from(allStakingRewardInfo.values())
-    },
     standard: {
       isReady: hasFarmReward,
       pendingReward: allFarmPendingReward.toFixed(10),
@@ -331,44 +321,6 @@ export default function useAllPositionInfo({ shouldFetch = true }: { shouldFetch
       })
     }
 
-    if (tab === 'staked RAY' && rewardState['staked RAY'].isReady && stakingFarmList.length) {
-      await harvestAllFarmAct({
-        farmInfoList: stakingFarmList.filter(
-          (farm) => !!allFarmBalances.find((f) => f.id === farm.id)?.pendingRewards.some((r) => !new Decimal(r || 0).isZero())
-        ),
-        onConfirmed: handleRefreshFarm
-      })
-    }
-
-    if (tab === 'concentrated' && rewardState.concentrated.isReady) {
-      const noneZeroPos = { ...clmmRecord }
-      Object.keys(noneZeroPos).forEach((key) => {
-        const readyList = noneZeroPos[key].filter(
-          (p) => !p.liquidity.isZero() && (zeroClmmPos ? !zeroClmmPos.has(p.nftMint.toBase58()) : true)
-        )
-        if (!readyList.length) {
-          delete noneZeroPos[key]
-          return
-        }
-        noneZeroPos[key] = readyList
-      })
-      await harvestAllClmmAct({
-        allPoolInfo: clmmData.reduce(
-          (acc, cur) =>
-            cur?.id
-              ? {
-                  ...acc,
-                  [cur.id]: cur
-                }
-              : acc,
-          {}
-        ),
-        allPositions: noneZeroPos,
-        lockInfo: clmmLockInfo,
-        execute: true,
-        onConfirmed: handleRefreshClmm
-      })
-    }
     setIsSending(false)
   })
 

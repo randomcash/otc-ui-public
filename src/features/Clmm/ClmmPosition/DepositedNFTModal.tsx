@@ -91,7 +91,7 @@ export default function DepositedNFTModal({ nftAddress, isOpen, onClose }: { nft
           </Text>
         </ModalBody>
         <ModalFooter px="0" py="0" mt="4" mb="2">
-          <Button onClick={() => router.push('/portfolio', { query: { tab: 'concentrated' }, hash: 'my-position' })} w="100%">
+          <Button onClick={() => router.push('/portfolio', { query: { tab: 'standard' }, hash: 'my-position' })} w="100%">
             {t('clmm.view_my_positions')}
           </Button>
         </ModalFooter>

@@ -8,7 +8,6 @@ import { useAppStore } from '@/store'
 import { isValidPublicKey } from '@/utils/publicKey'
 
 export enum FarmCategory {
-  Clmm = 'concentrated',
   Standard = 'standard',
   All = 'all'
 }
@@ -31,7 +30,7 @@ export default function useCreatedFarmInfo(props: { owner?: string | PublicKey; 
   })
   const formattedData = useMemo(() => {
     const res = data?.data || { clmm: [], farm: [] }
-    return res.clmm.map((d) => ({ ...d, type: FarmCategory.Clmm })).concat(res.farm.map((d) => ({ ...d, type: FarmCategory.Standard })))
+    return res.farm.map((d) => ({ ...d, type: FarmCategory.Standard }))
   }, [data])
   const isEmptyResult = !isLoading && !(data && !error)
 

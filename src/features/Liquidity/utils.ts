@@ -38,7 +38,7 @@ export type LiquidityActionModeType = 'add' | 'remove' | 'stake' | 'unstake' | '
 
 export type LiquidityFarmActionModeType = 'select' | 'reward' | 'review' | 'done'
 
-export type CreateFarmType = 'Standard' | 'Concentrated'
+export type CreateFarmType = 'Standard'
 
 export type LiquidityTabOptionType = IncreaseTabOptionType['value'] | DecreaseTabOptionType['value']
 

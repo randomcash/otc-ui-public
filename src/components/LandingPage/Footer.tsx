@@ -15,7 +15,7 @@ export default function Footer() {
     {
       title: 'ABOUT',
       items: [
-        <FooterItem key="footer-about-01">Meet Raydium</FooterItem>,
+        <FooterItem key="footer-about-01">Meet Rbx</FooterItem>,
         <FooterItem key="footer-about-02">Ray Token</FooterItem>,
         <FooterItem key="footer-about-03">Media Assets</FooterItem>
       ]
@@ -33,7 +33,7 @@ export default function Footer() {
       title: 'SUPPORT',
       items: [
         <FooterItem key="footer-support-01">Getting Started on Solana</FooterItem>,
-        <FooterItem key="footer-support-02">Getting Started on Raydium</FooterItem>,
+        <FooterItem key="footer-support-02">Getting Started on Rbx</FooterItem>,
         <FooterItem key="footer-support-03">FAQ</FooterItem>
       ]
     },

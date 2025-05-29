@@ -31,7 +31,7 @@ export default function Liquidity() {
       <Center px={[8, 0]}>
         <Flex direction="column" align="center">
           <Heading fontWeight={500} fontSize="3rem" lineHeight={'3.8rem'} color={colors.primary}>
-            Raydium provides Ecosystem-Wide
+            Rbx provides Ecosystem-Wide
           </Heading>
           <Heading fontWeight={500} fontSize="3rem" lineHeight={'3.8rem'} color={colors.primary}>
             Liquidity for users and projects
@@ -45,7 +45,7 @@ export default function Liquidity() {
               <Box h={'fit-content'}>
                 <CardTitle>Order Book AMM</CardTitle>
                 <CardBody>
-                  Raydium's AMM interacts with Serum's central limit order book, meaning that pools have access to all order flow and
+                  Rbx's AMM interacts with Serum's central limit order book, meaning that pools have access to all order flow and
                   liquidity on Serum, and vice versa.
                 </CardBody>
               </Box>
@@ -58,7 +58,7 @@ export default function Liquidity() {
               <Box h={'fit-content'}>
                 <CardTitle>Best Price Swaps</CardTitle>
                 <CardBody>
-                  Raydium determines whether swapping within a liquidity pool or through the Serum order book will provide the best price
+                  Rbx determines whether swapping within a liquidity pool or through the Serum order book will provide the best price
                   for the user, and executes accordingly.
                 </CardBody>
               </Box>
@@ -72,7 +72,7 @@ export default function Liquidity() {
                 <CardTitle>High-Liquidity Launches</CardTitle>
                 <CardBody>
                   AcceleRaytor offers projects a straightforward 3 step process to raise funds, launch an IDO, and bootstrap liquidity on
-                  Raydium and Serum.
+                  Rbx and Serum.
                 </CardBody>
               </Box>
             </Flex>

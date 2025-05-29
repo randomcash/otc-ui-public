@@ -46,11 +46,6 @@ export default function SelectPool(props: SelectPoolProps) {
 
       <HStack flexDirection={['column', 'row']} align={['stretch', 'center']} mb={4}>
         <PoolTypeTabItem
-          isActive={props.selectedPoolType === 'Concentrated'}
-          name={t('create_farm.concentrated_liquidity')}
-          onSelect={() => props.onSelectPoolType?.('Concentrated')}
-        />
-        <PoolTypeTabItem
           isActive={props.selectedPoolType === 'Standard'}
           name={t('create_farm.standard_amm')}
           onSelect={() => props.onSelectPoolType?.('Standard')}
@@ -58,19 +53,11 @@ export default function SelectPool(props: SelectPoolProps) {
       </HStack>
 
       <Box mb={5}>
-        {props.selectedPoolType === 'Concentrated' ? (
-          <SelectPoolConcentratedContent
-            createdClmmPools={props.createdClmmPools}
-            selectedPool={props.selectedPool}
-            onSelectConcentratedValue={props.onSelectPool}
-          />
-        ) : (
-          <SelectPoolStandardContent
-            selectedPool={props.selectedPool}
-            onSelectStandardValue={props.onSelectPool}
-            onDeleteStandardValue={onDeleteStandardValue}
-          />
-        )}
+        <SelectPoolStandardContent
+          selectedPool={props.selectedPool}
+          onSelectStandardValue={props.onSelectPool}
+          onDeleteStandardValue={onDeleteStandardValue}
+        />
       </Box>
 
       <Button isDisabled={!props.selectedPool} onClick={() => props.onClickContinue?.()}>

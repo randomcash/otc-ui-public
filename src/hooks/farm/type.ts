@@ -8,7 +8,7 @@ import {
 } from '@raydium-io/raydium-sdk-v2'
 import { FarmDecodeData } from './farmUtils'
 export enum FarmType {
-  Raydium = 'Raydium',
+  Raydium = 'Rbx',
   Fusion = 'Fusion',
   Ecosystem = 'Ecosystem'
 }

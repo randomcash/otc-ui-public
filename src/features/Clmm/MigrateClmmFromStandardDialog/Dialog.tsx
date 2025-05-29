@@ -114,7 +114,7 @@ export default function MigrateFromStandardDialog({
 
   const { formattedData } = useFetchPoolById<ApiV3PoolInfoConcentratedItem>({
     idList: [migrateClmmConfig.clmmId],
-    type: PoolFetchType.Concentrated
+    type: PoolFetchType.Standard
   })
   const clmmPoolInfo = formattedData?.[0]
 
@@ -194,15 +194,15 @@ export default function MigrateFromStandardDialog({
     setPriceRange(([priceLower, priceUpper]) => [
       priceUpper
         ? new Decimal(1)
-            .div(priceUpper)
-            .toDecimalPlaces(clmmPoolInfo?.poolDecimals ?? 0)
-            .toString()
+          .div(priceUpper)
+          .toDecimalPlaces(clmmPoolInfo?.poolDecimals ?? 0)
+          .toString()
         : priceUpper,
       priceLower
         ? new Decimal(1)
-            .div(priceLower)
-            .toDecimalPlaces(clmmPoolInfo?.poolDecimals ?? 0)
-            .toString()
+          .div(priceLower)
+          .toDecimalPlaces(clmmPoolInfo?.poolDecimals ?? 0)
+          .toString()
         : priceLower
     ])
   }, [baseIn, clmmPoolInfo?.poolDecimals])
@@ -311,7 +311,7 @@ export default function MigrateFromStandardDialog({
         onClose()
       },
       onConfirmed: () => {
-        routeToPage('portfolio', { queryProps: { section: 'my-positions', position_tab: 'concentrated' } })
+        routeToPage('portfolio', { queryProps: { section: 'my-positions', position_tab: 'standard' } })
       },
       onError: () => setLoading(false)
     })

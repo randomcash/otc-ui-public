@@ -115,153 +115,46 @@ export default function Swap() {
       mt={[0, getVHExpression([0, 800], [32, 1300])]}
       width={!isMobile && isPCChartShown ? 'min(100%, 1300px)' : undefined}
     >
-      <Grid
-        width="full"
-        gridTemplate={[
-          `
-            "controls" auto
-            "panel" auto
-            "kline" auto / auto
-          `,
-          isPCChartShown
-            ? isChartLeft
-              ? `". controls" auto "kline  panel" auto / 1.5fr 1fr`
-              : `". controls" auto "panel kline" auto / 1fr 1.5fr`
-            : `"controls" auto "panel" auto / auto`
-        ]}
-        columnGap={[3, isPCChartShown ? 4 : 0]}
-        rowGap={2}
-      >
-        <GridItem gridArea="controls">
-          <HStack justifyContent="space-between" my={[1, 0]}>
-            <MoonpayBuy>
-              <HStack gap={1}>
-                <CreditCardIcon />
-                <Text color={colors.textLink} fontWeight="medium">
-                  Buy
-                </Text>
-              </HStack>
-            </MoonpayBuy>
-            <HStack>
-              <SlippageAdjuster />
-              <Tooltip
-                label={t('swap.blink_referral_desc', {
-                  symbol: outputMint === solMintAddress ? tokenMap.get(inputMint)?.symbol : tokenMap.get(outputMint)?.symbol
-                })}
-              >
-                <Box
-                  cursor="pointer"
-                  opacity={isBlinkReferralActive ? 1 : 0.6}
-                  onClick={() => {
-                    if (isBlinkReferralActive) {
-                      onCopy()
-                      toastSubject.next({
-                        status: 'success',
-                        title: t('common.copy_success')
-                      })
-                    }
-                  }}
-                >
-                  <LinkIcon />
-                </Box>
-              </Tooltip>
-
-              {!isMobile && isPCChartShown && (
-                <Box
-                  cursor="pointer"
-                  onClick={() => {
-                    setIsChartLeft((b) => !b)
-                  }}
-                >
-                  <SwapExchangeIcon />
-                </Box>
-              )}
-              <Box
-                cursor="pointer"
-                onClick={() => {
-                  if (!isMobile) {
-                    setIsPCChartShown((b) => !b)
-                  } else {
-                    setIsMobileChartShown(true)
-                  }
-                }}
-              >
-                {isMobile || isPCChartShown ? (
-                  <SwapChatIcon />
-                ) : (
-                  <Box color={colors.textSecondary}>
-                    <SwapChatEmptyIcon />
-                  </Box>
-                )}
-              </Box>
-            </HStack>
+      <HStack justifyContent="space-between" my={[1, 0]}>
+        <MoonpayBuy>
+          <HStack gap={1}>
+            <CreditCardIcon />
+            <Text color={colors.textLink} fontWeight="medium">
+              Buy
+            </Text>
           </HStack>
-        </GridItem>
-        <GridItem ref={swapPanelRef} gridArea="panel">
-          <PanelCard p={[3, 6]} flexGrow={['1', 'unset']}>
-            <SwapPanel
-              onInputMintChange={setInputMint}
-              onOutputMintChange={setOutputMint}
-              // onDirectionNeedReverse={() => setIsDirectionNeedReverse((b) => !b)}
-            />
-          </PanelCard>
-        </GridItem>
-
-        <GridItem gridArea="kline" {...(isMobile ? { mb: 3 } : {})} overflow="hidden">
-          <PanelCard ref={klineRef} p={[3, 3]} gap={4} height="100%" {...(isMobile || !isPCChartShown ? { display: 'none' } : {})}>
-            <HStack spacing={2}>
-              <TokenAvatarPair token1={baseToken} token2={quoteToken} />
-              <HStack>
-                <Text fontSize="20px" fontWeight="500">
-                  {baseToken?.symbol} / {quoteToken?.symbol}
-                </Text>
-                <Box cursor="pointer" onClick={() => setDirectionReverse((b) => !b)}>
-                  <SwapIcon />
-                </Box>
-                <Text fontSize="sm" color={colors.textTertiary}>
-                  {dayjs().utc().format('YY/MM/DD HH:MM')}
-                </Text>
-              </HStack>
-            </HStack>
-            {/* <SwapKlinePanel
-              untilDate={untilDate.current}
-              baseToken={baseToken}
-              quoteToken={quoteToken}
-              timeType={selectedTimeType}
-              onDirectionToggle={() => setDirectionReverse((b) => !b)}
-              onTimeTypeChange={setSelectedTimeType}
-            /> */}
-          </PanelCard>
-          {isMobile && (
-            <PanelCard
-              p={[3, 6]}
-              gap={0}
+        </MoonpayBuy>
+        <HStack>
+          <Tooltip
+            label={t('swap.blink_referral_desc', {
+              symbol: outputMint === solMintAddress ? tokenMap.get(inputMint)?.symbol : tokenMap.get(outputMint)?.symbol
+            })}
+          >
+            <Box
+              cursor="pointer"
+              opacity={isBlinkReferralActive ? 1 : 0.6}
               onClick={() => {
-                setIsMobileChartShown(true)
+                if (isBlinkReferralActive) {
+                  onCopy()
+                  toastSubject.next({
+                    status: 'success',
+                    title: t('common.copy_success')
+                  })
+                }
               }}
-              height="100%"
             >
-              <SwapKlinePanelMobileThumbnail
-                untilDate={untilDate.current}
-                baseToken={baseToken}
-                quoteToken={quoteToken}
-                // onDirectionToggle={() => setDirectionReverse((b) => !b)}
-                // onTimeTypeChange={setSelectedTimeType}
-              />
-              <SwapKlinePanelMobileDrawer
-                untilDate={untilDate.current}
-                isOpen={isMobileChartShown}
-                onClose={() => setIsMobileChartShown(false)}
-                baseToken={baseToken}
-                quoteToken={quoteToken}
-                timeType={selectedTimeType}
-                onDirectionToggle={() => setDirectionReverse((b) => !b)}
-                onTimeTypeChange={setSelectedTimeType}
-              />
-            </PanelCard>
-          )}
-        </GridItem>
-      </Grid>
+              <LinkIcon />
+            </Box>
+          </Tooltip>
+        </HStack>
+      </HStack>
+      <PanelCard p={[3, 6]} flexGrow={['1', 'unset']}>
+        <SwapPanel
+          onInputMintChange={setInputMint}
+          onOutputMintChange={setOutputMint}
+        // onDirectionNeedReverse={() => setIsDirectionNeedReverse((b) => !b)}
+        />
+      </PanelCard>
     </VStack>
   )
 }

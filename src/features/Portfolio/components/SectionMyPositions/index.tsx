@@ -30,19 +30,11 @@ export default function SectionMyPositions() {
     value: PositionTabValues
     label: string
   }[] = [
-    {
-      value: 'concentrated',
-      label: t('portfolio.section_positions_tab_clmm')
-    },
-    {
-      value: 'standard',
-      label: t('portfolio.section_positions_tab_standard')
-    },
-    {
-      value: 'staked RAY',
-      label: t('portfolio.section_positions_tab_staking')
-    }
-  ]
+      {
+        value: 'standard',
+        label: t('portfolio.section_positions_tab_standard')
+      }
+    ]
   const connected = useAppStore((s) => s.connected)
   const owner = useAppStore((s) => s.publicKey)
   const isMobile = useAppStore((s) => s.isMobile)
@@ -58,9 +50,9 @@ export default function SectionMyPositions() {
     setCurrentTab(tab)
   }
 
-  const isFocusClmmTab = currentTab === tabs[0].value
-  const isFocusStandardTab = currentTab === tabs[1].value
-  const isFocusStake = currentTab === tabs[2].value
+  const isFocusClmmTab = false //currentTab === false
+  const isFocusStandardTab = true //currentTab === tabs[1].value
+  const isFocusStake = false //currentTab === tabs[2].value
 
   const noRewardClmmPos = useRef<Set<string>>(new Set())
   const setNoRewardClmmPos = useEvent((poolId: string, isDelete?: boolean) => {

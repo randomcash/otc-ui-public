@@ -165,7 +165,7 @@ export default function Lock() {
           onRefresh={mutateClmmLockInfo}
         />
       )}
-      <LockedNFTModal nftAddress={nftAddress} positionTabValue="concentrated" isOpen={isNFTOpen} onClose={onNFTClose} />
+      <LockedNFTModal nftAddress={nftAddress} positionTabValue="standard" isOpen={isNFTOpen} onClose={onNFTClose} />
     </>
   )
 }

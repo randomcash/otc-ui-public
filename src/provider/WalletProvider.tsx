@@ -71,7 +71,7 @@ const App: FC<PropsWithChildren<any>> = ({ children }) => {
     try {
       connectWallet.push(
         new WalletConnectWalletAdapter({
-          network: network as WalletAdapterNetwork.Mainnet,
+          network: network as WalletAdapterNetwork.Devnet,  //TODO: add swapper for environment
           options: {
             projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PJ_ID,
             metadata: {
@@ -110,7 +110,7 @@ const App: FC<PropsWithChildren<any>> = ({ children }) => {
       new ExodusWalletAdapter({ endpoint }),
       new TipLinkWalletAdapter({
         clientId: process.env.NEXT_PUBLIC_WALLET_TIP_WALLET_KEY ?? '',
-        title: 'Raydium',
+        title: 'Rbx',
         theme: 'system'
       }) as unknown as Adapter
     ],
