@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { ApiV3PoolInfoConcentratedItem } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3PoolInfoConcentratedItem } from '@rbx/rbx-sdk'
 import {
   Box,
   Flex,
@@ -157,8 +157,8 @@ export default function PreviewDepositModal({
                     {price0Decimal > decimals
                       ? formatCurrency(new Decimal(priceRange[0]).toFixed(24), { maximumDecimalTrailingZeroes: 5 })
                       : formatCurrency(new Decimal(priceRange[0]).toDecimalPlaces(decimals).toFixed(24), {
-                          maximumDecimalTrailingZeroes: 5
-                        })}
+                        maximumDecimalTrailingZeroes: 5
+                      })}
                   </Text>
                   <Text variant="subTitle" color={colors.textSecondary} opacity="0.5">
                     {t('common.per_unit', {
@@ -183,9 +183,9 @@ export default function PreviewDepositModal({
                     {price1Decimal > decimals
                       ? formatCurrency(new Decimal(priceRange[1]).toFixed(24), { maximumDecimalTrailingZeroes: 5, abbreviated: true })
                       : formatCurrency(new Decimal(priceRange[1]).toDecimalPlaces(decimals).toFixed(24), {
-                          maximumDecimalTrailingZeroes: 5,
-                          abbreviated: true
-                        })}
+                        maximumDecimalTrailingZeroes: 5,
+                        abbreviated: true
+                      })}
                   </Text>
                   <Text variant="subTitle" color={colors.textSecondary} opacity="0.5">
                     {t('common.per_unit', {

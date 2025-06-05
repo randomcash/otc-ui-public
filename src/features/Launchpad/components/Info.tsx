@@ -18,7 +18,7 @@ import { HelpCircle } from 'react-feather'
 import CircleCheck from '@/icons/misc/CircleCheck'
 import CopyLaunchpadIcon from '@/icons/misc/CopyLaunchpadIcon'
 import { encodeStr } from '@/utils/common'
-import { Curve, LaunchpadPoolInfo } from '@raydium-io/raydium-sdk-v2'
+import { Curve, LaunchpadPoolInfo } from '@rbx/rbx-sdk'
 import dayjs from 'dayjs'
 import { CurveLineChart, Point } from './Charts/CurveLineChart'
 import { wSolToSolString } from '@/utils/token'
@@ -136,12 +136,12 @@ export default function Info({
       }).toNumber()
       const initPrice = Number(
         mintInfo.initPrice ||
-          Curve.getPoolInitPriceByPool({
-            poolInfo,
-            decimalA: poolInfo.mintDecimalsA,
-            decimalB: poolInfo.mintDecimalsB,
-            curveType: mintInfo.configInfo.curveType
-          }).toNumber()
+        Curve.getPoolInitPriceByPool({
+          poolInfo,
+          decimalA: poolInfo.mintDecimalsA,
+          decimalB: poolInfo.mintDecimalsB,
+          curveType: mintInfo.configInfo.curveType
+        }).toNumber()
       )
       const _n = poolPrice - initPrice
       const _d = endPrice - initPrice
@@ -180,8 +180,8 @@ export default function Info({
         sx={
           isLight
             ? {
-                border: '1px solid #BFD2FF80'
-              }
+              border: '1px solid #BFD2FF80'
+            }
             : {}
         }
       >
@@ -270,9 +270,8 @@ export default function Info({
                         <Tooltip
                           hasArrow
                           placement="top"
-                          label={`When market cap is above ${
-                            marketCap ? formatCurrency(marketCap?.marketCapRange[1], { symbol: '$', decimalPlaces: 2 }) : '--'
-                          }, this token will be highlighted when appearing on the main feed.`}
+                          label={`When market cap is above ${marketCap ? formatCurrency(marketCap?.marketCapRange[1], { symbol: '$', decimalPlaces: 2 }) : '--'
+                            }, this token will be highlighted when appearing on the main feed.`}
                         >
                           <HelpCircle size={10} color={colors.lightPurple} />
                         </Tooltip>
@@ -299,9 +298,8 @@ export default function Info({
                         <Tooltip
                           hasArrow
                           placement="top"
-                          label={`When market cap reaches ${
-                            marketCap ? formatCurrency(marketCap?.marketCapRange[2], { symbol: '$', decimalPlaces: 2 }) : '--'
-                          }, this token will be pinned to the top of the main feed until extinguished by another token.`}
+                          label={`When market cap reaches ${marketCap ? formatCurrency(marketCap?.marketCapRange[2], { symbol: '$', decimalPlaces: 2 }) : '--'
+                            }, this token will be pinned to the top of the main feed until extinguished by another token.`}
                         >
                           <HelpCircle size={10} color={colors.lightPurple} />
                         </Tooltip>
@@ -327,9 +325,8 @@ export default function Info({
                         <Tooltip
                           hasArrow
                           placement="top"
-                          label={`When market cap reaches ${
-                            marketCap ? formatCurrency(marketCap?.marketCapRange[3], { symbol: '$', decimalPlaces: 2 }) : '--'
-                          }, bonding curve liquidity will migrate to an AMM pool where LP tokens will be burned and trading will continue.`}
+                          label={`When market cap reaches ${marketCap ? formatCurrency(marketCap?.marketCapRange[3], { symbol: '$', decimalPlaces: 2 }) : '--'
+                            }, bonding curve liquidity will migrate to an AMM pool where LP tokens will be burned and trading will continue.`}
                         >
                           <HelpCircle size={10} color={colors.lightPurple} />
                         </Tooltip>
@@ -431,10 +428,10 @@ export default function Info({
               {mintInfo.configInfo.curveType === 0
                 ? 'Constant Product Curve'
                 : mintInfo.configInfo.curveType === 1
-                ? 'Fixed Product Curve'
-                : mintInfo.configInfo.curveType === 2
-                ? 'Linear Product Curve'
-                : 'Constant Product Curve'}
+                  ? 'Fixed Product Curve'
+                  : mintInfo.configInfo.curveType === 2
+                    ? 'Linear Product Curve'
+                    : 'Constant Product Curve'}
             </Text>
           </Flex>
           <Flex alignItems="center" justifyContent="space-between" gap={1}>
@@ -444,9 +441,8 @@ export default function Info({
               <Tooltip
                 hasArrow
                 placement="top"
-                label={`Program(${Number(mintInfo.configInfo.tradeFeeRate) / 10000}%) + Platform(${
-                  Number(mintInfo.platformInfo.feeRate) / 10000
-                }%) `}
+                label={`Program(${Number(mintInfo.configInfo.tradeFeeRate) / 10000}%) + Platform(${Number(mintInfo.platformInfo.feeRate) / 10000
+                  }%) `}
               >
                 <QuestionCircleIcon color={colors.lightPurple} />
               </Tooltip>
@@ -475,8 +471,8 @@ export default function Info({
         sx={
           isLight
             ? {
-                border: '1px solid #BFD2FF80'
-              }
+              border: '1px solid #BFD2FF80'
+            }
             : {}
         }
         fontSize="sm"
@@ -540,10 +536,10 @@ export default function Info({
                     ? Number(mintInfo.cliffPeriod) === 0
                       ? 'No Cliff Period'
                       : `Est. cliff start and end dates: ${dayjs(mintInfo.priceFinalTime * 1000).format('MM/DD/YY')} - ${dayjs(
-                          mintInfo.priceFinalTime * 1000
-                        )
-                          .add(Number(mintInfo.cliffPeriod), 'seconds')
-                          .format('MM/DD/YY')}`
+                        mintInfo.priceFinalTime * 1000
+                      )
+                        .add(Number(mintInfo.cliffPeriod), 'seconds')
+                        .format('MM/DD/YY')}`
                     : 'Cliff and vesting times start at token graduation.'
                 }
               >
@@ -567,8 +563,8 @@ export default function Info({
                     ? Number(mintInfo.unlockPeriod)
                       ? 'No Vesting Duration'
                       : `Est. vesting start and end dates: ${dayjs(mintInfo.priceFinalTime * 1000)
-                          .add(Number(mintInfo.cliffPeriod), 'seconds')
-                          .format('MM/DD/YY')} - ${dayjs(mintInfo.priceFinalTime * 1000)
+                        .add(Number(mintInfo.cliffPeriod), 'seconds')
+                        .format('MM/DD/YY')} - ${dayjs(mintInfo.priceFinalTime * 1000)
                           .add(Number(mintInfo.cliffPeriod), 'seconds')
                           .add(Number(mintInfo.unlockPeriod), 'seconds')
                           .format('MM/DD/YY')}`

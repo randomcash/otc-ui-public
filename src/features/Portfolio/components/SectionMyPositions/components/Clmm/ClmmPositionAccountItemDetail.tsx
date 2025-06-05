@@ -9,7 +9,7 @@ import { AprData } from '@/features/Clmm/utils/calApr'
 import EstimatedApr from './ClmmPositionAccountItemDetail/EstimatedApr'
 import PendingYield from './ClmmPositionAccountItemDetail/PendingYield'
 import { useEvent } from '@/hooks/useEvent'
-import { ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token } from '@rbx/rbx-sdk'
 import { colors } from '@/theme/cssVariables'
 import AddressChip from '@/components/AddressChip'
 import TokenAvatar from '@/components/TokenAvatar'
@@ -148,11 +148,11 @@ export default function ClmmPositionAccountItemDetail({
                     <Text as="span" color={colors.textPrimary}>
                       {baseIn
                         ? formatCurrency(poolInfo.price, {
-                            decimalPlaces: poolInfo.recommendDecimal(poolInfo.price)
-                          })
+                          decimalPlaces: poolInfo.recommendDecimal(poolInfo.price)
+                        })
                         : formatCurrency(new Decimal(1).div(poolInfo.price).toString(), {
-                            decimalPlaces: poolInfo.recommendDecimal(new Decimal(1).div(poolInfo.price).toString())
-                          })}
+                          decimalPlaces: poolInfo.recommendDecimal(new Decimal(1).div(poolInfo.price).toString())
+                        })}
                     </Text>{' '}
                     {t('common.per_unit', {
                       subA: poolInfo[baseIn ? 'mintB' : 'mintA'].symbol,

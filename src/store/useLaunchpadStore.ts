@@ -19,7 +19,7 @@ import {
   LaunchpadConfig,
   FEE_RATE_DENOMINATOR,
   ApiV3Token
-} from '@raydium-io/raydium-sdk-v2'
+} from '@rbx/rbx-sdk'
 import axios from '@/api/axios'
 import { MintInfo } from '@/features/Launchpad/type'
 import { LaunchpadConfigInfo } from '@/hooks/launchpad/usePoolRpcInfo'

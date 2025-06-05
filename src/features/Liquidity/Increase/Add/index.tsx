@@ -1,5 +1,5 @@
 import { Flex, HStack, Text, useDisclosure } from '@chakra-ui/react'
-import { ApiV3PoolInfoStandardItem, ApiV3Token, TokenInfo, ApiV3PoolInfoStandardItemCpmm } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3PoolInfoStandardItem, ApiV3Token, TokenInfo, ApiV3PoolInfoStandardItemCpmm } from '@rbx/rbx-sdk'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -123,34 +123,34 @@ export default function AddLiquidity({
   const [isBalanceAEnough, isBalanceBEnough] = [
     tokenPair.base
       ? new Decimal(getTokenBalanceUiAmount({ mint: tokenPair.base.address, decimals: tokenPair.base.decimals }).text).gte(
-          pairAmount.base || '0'
-        )
+        pairAmount.base || '0'
+      )
       : true,
     tokenPair.quote
       ? new Decimal(getTokenBalanceUiAmount({ mint: tokenPair.quote.address, decimals: tokenPair.quote.decimals }).text).gte(
-          pairAmount.quote || '0'
-        )
+        pairAmount.quote || '0'
+      )
       : true
   ]
 
   let error =
     new Decimal(pairAmount.base || '0').lte(0) || new Decimal(pairAmount.quote || '0').lte(0)
       ? {
-          key: 'error.enter_token_amount',
-          props: {}
-        }
+        key: 'error.enter_token_amount',
+        props: {}
+      }
       : undefined
   error =
     error ||
     (!isBalanceAEnough || !isBalanceBEnough
       ? {
-          key: 'error.insufficient_sub_balance',
-          props: {
-            token: isBalanceAEnough
-              ? getMintSymbol({ mint: tokenPair.quote!, transformSol: true })
-              : getMintSymbol({ mint: tokenPair.base!, transformSol: true })
-          }
+        key: 'error.insufficient_sub_balance',
+        props: {
+          token: isBalanceAEnough
+            ? getMintSymbol({ mint: tokenPair.quote!, transformSol: true })
+            : getMintSymbol({ mint: tokenPair.base!, transformSol: true })
         }
+      }
       : undefined)
 
   const handleEnd = useCallback(
@@ -285,11 +285,11 @@ export default function AddLiquidity({
           <Text>
             {pool
               ? `1 ${wSolToSolString(pool[isReverse ? 'mintB' : 'mintA'].symbol)} ≈ ${formatCurrency(
-                  new Decimal((isReverse ? rpcMintAmountA! : rpcMintAmountB!) / (isReverse ? rpcMintAmountB! : rpcMintAmountA!)).toFixed(
-                    Math.max(pool[isReverse ? 'mintA' : 'mintB'].decimals, 6),
-                    Decimal.ROUND_UP
-                  )
-                )} ${wSolToSolString(pool[isReverse ? 'mintA' : 'mintB'].symbol)}`
+                new Decimal((isReverse ? rpcMintAmountA! : rpcMintAmountB!) / (isReverse ? rpcMintAmountB! : rpcMintAmountA!)).toFixed(
+                  Math.max(pool[isReverse ? 'mintA' : 'mintB'].decimals, 6),
+                  Decimal.ROUND_UP
+                )
+              )} ${wSolToSolString(pool[isReverse ? 'mintA' : 'mintB'].symbol)}`
               : '-'}
           </Text>
           <HorizontalSwitchSmallIcon cursor="pointer" onClick={onToggleReverse} />

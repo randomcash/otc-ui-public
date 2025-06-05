@@ -6,7 +6,7 @@ import {
   LOOKUP_TABLE_CACHE,
   CreatePoolAddress,
   MarketExtInfo
-} from '@raydium-io/raydium-sdk-v2'
+} from '@rbx/rbx-sdk'
 import { PublicKey, Transaction, VersionedTransaction, TransactionMessage, SystemProgram } from '@solana/web3.js'
 import { TOKEN_2022_PROGRAM_ID } from '@solana/spl-token'
 import { useAppStore, useTokenAccountStore, useTokenStore } from './'
@@ -277,7 +277,7 @@ export const useCreateMarketStore = createStore<CreateMarketState>(
       if (txVersion === TxVersion.V0) {
         readyAccounts = (transactions as VersionedTransaction[]).map((tx) =>
           TransactionMessage.decompile(tx.message, {
-            addressLookupTableAccounts: Object.values(LOOKUP_TABLE_CACHE),
+            addressLookupTableAccounts: Object.values(LOOKUP_TABLE_CACHE)
           })
             .instructions.filter((i) => i.programId.equals(SystemProgram.programId))
             .map((tx) => tx.keys.map((k) => k.pubkey.toBase58())[1])

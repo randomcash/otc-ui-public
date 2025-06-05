@@ -2,7 +2,7 @@ import { useEffect, ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { SignatureResult, Context, VersionedTransaction, Transaction, TransactionError } from '@solana/web3.js'
 import { Flex, Box } from '@chakra-ui/react'
-import { ApiV3Token, TxVersion } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token, TxVersion } from '@rbx/rbx-sdk'
 import { Subject } from 'rxjs'
 
 import { useAppStore } from '@/store/useAppStore'
@@ -172,12 +172,12 @@ function useTxStatus() {
                 title: isSlippageError
                   ? t('error.swap_slippage_error_title')
                   : (isMultisigWallet ? (
-                      <>
-                        {title} {t('transaction.multisig_wallet_initiation')}
-                      </>
-                    ) : (
-                      title
-                    )) + ` ${t('transaction.failed')}`,
+                    <>
+                      {title} {t('transaction.multisig_wallet_initiation')}
+                    </>
+                  ) : (
+                    title
+                  )) + ` ${t('transaction.failed')}`,
                 status: 'error',
                 description: isSlippageError ? t('error.swap_slippage_error_desc') : description || `${explorerUrl}/tx/${txId}`,
                 detail: renderDetail('error'),
@@ -429,12 +429,12 @@ function useTxStatus() {
                     title: isSlippageError
                       ? t('error.swap_slippage_error_title')
                       : (isMultisigWallet ? (
-                          <>
-                            {title} {t('transaction.multisig_wallet_initiation')}
-                          </>
-                        ) : (
-                          title || t('transaction.title')
-                        )) + t('transaction.failed'),
+                        <>
+                          {title} {t('transaction.multisig_wallet_initiation')}
+                        </>
+                      ) : (
+                        title || t('transaction.title')
+                      )) + t('transaction.failed'),
                     status: 'error',
                     description: isSlippageError ? t('error.swap_slippage_error_desc') : description,
                     detail: renderDetail(),
@@ -470,8 +470,8 @@ function useTxStatus() {
                     title: isMultisigWallet
                       ? t('transaction.multisig_wallet_initiated')
                       : title
-                      ? `${title} ${t('transaction.confirmed')}`
-                      : `${t('transaction.title')} ${t('transaction.confirmed')}`,
+                        ? `${title} ${t('transaction.confirmed')}`
+                        : `${t('transaction.title')} ${t('transaction.confirmed')}`,
                     description,
                     detail: renderDetail(),
                     status: isAllSuccess ? 'success' : 'info',

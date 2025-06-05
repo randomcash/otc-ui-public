@@ -1,7 +1,7 @@
 import useFetchPoolKLine, { TimeType } from '@/hooks/pool/useFetchPoolKLine'
 import { colors } from '@/theme/cssVariables/colors'
 import { AbsoluteCenter, Box, GridItem, Spinner, Text, useColorMode } from '@chakra-ui/react'
-import { ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token } from '@rbx/rbx-sdk'
 import dayjs from 'dayjs'
 import { ColorType, CrosshairMode, IChartApi, ISeriesApi, TickMarkType, createChart } from 'lightweight-charts'
 import { useEffect, useRef } from 'react'
@@ -163,9 +163,9 @@ export default function CandleChart({ onPriceChange, baseMint, quoteMint, timeTy
     onPriceChange?.(
       currentPrice != null
         ? {
-            current: currentPrice,
-            change: change24H || 0
-          }
+          current: currentPrice,
+          change: change24H || 0
+        }
         : undefined
     )
   }, [onPriceChange, currentPrice, change24H])

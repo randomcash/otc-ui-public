@@ -1,22 +1,22 @@
 import { shrinkToValue } from '@/utils/shrinkToValue'
 import { ButtonProps as ChakraButtonProps, Button as ChakraButton } from '@chakra-ui/react'
 import { forwardRef } from 'react'
-import { MayArray, MayFunction } from '@raydium-io/raydium-sdk-v2'
+import { MayArray, MayFunction } from 'rbx-sdk'
 
 /**
  * migrated from V2, and have pre-defined style
  */
 export interface ButtonProps extends Omit<ChakraButtonProps, 'colorScheme'> {
   variant?:
-    | 'solid'
-    | 'solid-dark' // not shining eye-breaking gradient button
-    | 'outline'
-    | 'ghost'
-    | 'link'
-    | 'unstyled'
-    | 'capsule'
-    | 'capsule-radio'
-    | 'rect-rounded-radio'
+  | 'solid'
+  | 'solid-dark' // not shining eye-breaking gradient button
+  | 'outline'
+  | 'ghost'
+  | 'link'
+  | 'unstyled'
+  | 'capsule'
+  | 'capsule-radio'
+  | 'rect-rounded-radio'
   validators?: MayArray<{
     /** must return true to pass this validator */
     should: MayFunction<any>
@@ -33,11 +33,11 @@ export default forwardRef(function Button({ validators, ...restProps }: ButtonPr
     : undefined
   const mergedProps: Omit<ButtonProps, 'validators'> = failedValidator
     ? {
-        ...restProps,
-        ...failedValidator.fallbackProps,
-        isDisabled: true,
-        isActive: failedValidator.forceActive
-      }
+      ...restProps,
+      ...failedValidator.fallbackProps,
+      isDisabled: true,
+      isActive: failedValidator.forceActive
+    }
     : restProps
 
   return <ChakraButton ref={ref as any} {...mergedProps} />

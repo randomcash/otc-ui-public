@@ -3,7 +3,7 @@ import { Badge, Button, Drawer, DrawerBody, DrawerContent, DrawerFooter, DrawerO
 import { useTranslation } from 'react-i18next'
 import { RewardInfo } from './FarmItem'
 import { FarmCategory } from '@/hooks/portfolio/farm/useCreatedFarmInfo'
-import { ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token } from '@rbx/rbx-sdk'
 import TokenAvatarPair from '@/components/TokenAvatarPair'
 import TokenAvatar from '@/components/TokenAvatar'
 import AddressChip from '@/components/AddressChip'
@@ -88,21 +88,21 @@ export default function MobileFarmDetailDrawer({
             <Flex direction="column" fontSize="sm" color={colors.textPrimary} gap={2} width="100%">
               {rewardsInfo.length
                 ? rewardsInfo.map((reward) => (
-                    <Flex key={reward.mint.address} justifyContent="space-between">
-                      <Flex justify={'flex-start'} align="center">
-                        <TokenAvatar size="xs" token={reward.mint} mr={1} />
-                        <Text fontSize="sm" fontWeight="medium" color={colors.textPrimary} mr={1}>
-                          {formatCurrency(reward.weekly, { decimalPlaces: reward.mint.decimals })}
-                        </Text>
-                        <Text fontSize="sm" fontWeight="medium" color={colors.textTertiary}>
-                          {wSolToSolString(reward.mint.symbol)}
-                        </Text>
-                      </Flex>
-                      <Text fontSize="xs" color={colors.lightPurple}>
-                        {reward.periodString}
+                  <Flex key={reward.mint.address} justifyContent="space-between">
+                    <Flex justify={'flex-start'} align="center">
+                      <TokenAvatar size="xs" token={reward.mint} mr={1} />
+                      <Text fontSize="sm" fontWeight="medium" color={colors.textPrimary} mr={1}>
+                        {formatCurrency(reward.weekly, { decimalPlaces: reward.mint.decimals })}
+                      </Text>
+                      <Text fontSize="sm" fontWeight="medium" color={colors.textTertiary}>
+                        {wSolToSolString(reward.mint.symbol)}
                       </Text>
                     </Flex>
-                  ))
+                    <Text fontSize="xs" color={colors.lightPurple}>
+                      {reward.periodString}
+                    </Text>
+                  </Flex>
+                ))
                 : '--'}
             </Flex>
           </Flex>
@@ -124,16 +124,16 @@ export default function MobileFarmDetailDrawer({
             <Flex direction="column" fontSize="sm" color={colors.textPrimary} gap={2}>
               {rewardsInfo.length
                 ? rewardsInfo.map((reward) => (
-                    <Flex key={reward.mint.address} justify={'flex-start'} align="center">
-                      <TokenAvatar size="xs" token={reward.mint} mr={1} />
-                      <Text fontSize="sm" fontWeight="medium" color={colors.textPrimary} mr={1}>
-                        {formatToRawLocaleStr(reward.unEmit)}
-                      </Text>
-                      <Text fontSize="sm" fontWeight="medium" color={colors.textTertiary}>
-                        {wSolToSolString(reward.mint.symbol)}
-                      </Text>
-                    </Flex>
-                  ))
+                  <Flex key={reward.mint.address} justify={'flex-start'} align="center">
+                    <TokenAvatar size="xs" token={reward.mint} mr={1} />
+                    <Text fontSize="sm" fontWeight="medium" color={colors.textPrimary} mr={1}>
+                      {formatToRawLocaleStr(reward.unEmit)}
+                    </Text>
+                    <Text fontSize="sm" fontWeight="medium" color={colors.textTertiary}>
+                      {wSolToSolString(reward.mint.symbol)}
+                    </Text>
+                  </Flex>
+                ))
                 : '--'}
             </Flex>
           </Flex>

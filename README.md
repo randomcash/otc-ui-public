@@ -82,7 +82,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 - [`useIsomorphicLayoutEffect()`](./src/hooks/useIsomorphicLayoutEffect.ts) useLayoutEffect()'s SSR version. Avoid bug report in CMD(name is conventional)
 - [`useEvent()`](./src/hooks/useEvent.ts) make function dependence always update but function address never change(it hook is suggested by Dan Abramov)
 - [`useSearch()`](./src/utils/searchItems.ts) a wrapper of [searchItems](./src/utils/searchItems.ts)
-- [`useToast()`](./src/hooks/useToast.tsx) a wrapper of chakra toast w/ Raydium style
+- [`useToast()`](./src/hooks/useToast.tsx) a wrapper of chakra toast w/ Rbx style
 
 ### utils Map
 

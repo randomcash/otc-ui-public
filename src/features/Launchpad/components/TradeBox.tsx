@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { Box, Flex, Button, Text, useColorMode } from '@chakra-ui/react'
 import { NumericFormat } from 'react-number-format'
-import { ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token } from '@rbx/rbx-sdk'
 import { colors } from '@/theme/cssVariables/colors'
 import { detectedSeparator, formatCurrency, trimTrailZero } from '@/utils/numberish/formatter'
 import { SegmentedButton, OrderSide } from '@/components/SegmentedButton'
@@ -9,7 +9,7 @@ import { SlippageAdjuster } from './SlippageAdjuster'
 import { SlippageAdjuster as SwapSlippageAdjuster } from '@/components/SlippageAdjuster'
 import TokenAvatar from '@/components/TokenAvatar'
 import { useEvent } from '@/hooks/useEvent'
-import { Curve } from '@raydium-io/raydium-sdk-v2'
+import { Curve } from '@rbx/rbx-sdk'
 import { LaunchpadConfigInfo, LaunchpadPoolInfo } from '@/hooks/launchpad/usePoolRpcInfo'
 import BN from 'bn.js'
 import Decimal from 'decimal.js'
@@ -90,8 +90,8 @@ export default function TradeBox({
 
   const mintBalance = mintB?.address
     ? getTokenBalanceUiAmount({ mint: mintB.address, decimals: mintBInfo?.decimals })
-        .amount.sub(configInfo?.mintB.equals(NATIVE_MINT) ? DEFAULT_SOL_RESERVER : 0)
-        .clamp(0, Number.MAX_SAFE_INTEGER)
+      .amount.sub(configInfo?.mintB.equals(NATIVE_MINT) ? DEFAULT_SOL_RESERVER : 0)
+      .clamp(0, Number.MAX_SAFE_INTEGER)
     : new Decimal(0)
 
   const isMintCreated = onChain || mintABalance.gt(0)
@@ -280,35 +280,35 @@ export default function TradeBox({
       inputMint:
         mintInfo && response.data?.inputMint === mintInfo?.mint
           ? {
-              chainId: 101,
-              address: mintInfo.mint,
-              programId: TOKEN_PROGRAM_ID.toBase58(),
-              logoURI: mintInfo.imgUrl,
-              symbol: mintInfo.symbol,
-              name: mintInfo.name,
-              decimals: parseFloat(mintInfo.decimals),
-              tags: [],
-              extensions: {}
-            }
+            chainId: 101,
+            address: mintInfo.mint,
+            programId: TOKEN_PROGRAM_ID.toBase58(),
+            logoURI: mintInfo.imgUrl,
+            symbol: mintInfo.symbol,
+            name: mintInfo.name,
+            decimals: parseFloat(mintInfo.decimals),
+            tags: [],
+            extensions: {}
+          }
           : response.data?.inputMint === mintBInfo?.address
-          ? mintBInfo
-          : undefined,
+            ? mintBInfo
+            : undefined,
       outputMint:
         mintInfo && response.data?.outputMint === mintInfo?.mint
           ? {
-              chainId: 101,
-              address: mintInfo.mint,
-              programId: TOKEN_PROGRAM_ID.toBase58(),
-              logoURI: mintInfo.imgUrl,
-              symbol: mintInfo.symbol,
-              name: mintInfo.name,
-              decimals: parseFloat(mintInfo.decimals),
-              tags: [],
-              extensions: {}
-            }
+            chainId: 101,
+            address: mintInfo.mint,
+            programId: TOKEN_PROGRAM_ID.toBase58(),
+            logoURI: mintInfo.imgUrl,
+            symbol: mintInfo.symbol,
+            name: mintInfo.name,
+            decimals: parseFloat(mintInfo.decimals),
+            tags: [],
+            extensions: {}
+          }
           : response.data?.outputMint === mintBInfo?.address
-          ? mintBInfo
-          : undefined,
+            ? mintBInfo
+            : undefined,
       wrapSol: isSolWSol(inputMint),
       unwrapSol: isSolWSol(outputMint),
       onCloseToast: offSending,
@@ -357,8 +357,8 @@ export default function TradeBox({
       sx={
         isLight
           ? {
-              border: '1px solid #BFD2FF80'
-            }
+            border: '1px solid #BFD2FF80'
+          }
           : {}
       }
     >

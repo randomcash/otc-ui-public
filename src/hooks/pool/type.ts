@@ -6,7 +6,7 @@ import {
   ApiV3Token,
   PoolFarmRewardInfo,
   PoolFetchType
-} from '@raydium-io/raydium-sdk-v2'
+} from '@rbx/rbx-sdk'
 import Decimal from 'decimal.js'
 
 export type WeeklyRewardData = { orgAmount: string; amount: string; token: ApiV3Token; startTime?: number; endTime?: number }[]

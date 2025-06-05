@@ -27,7 +27,7 @@ import {
   ModalOverlay,
   Text
 } from '@chakra-ui/react'
-import { ApiV3PoolInfoConcentratedItem } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3PoolInfoConcentratedItem } from '@rbx/rbx-sdk'
 import IntervalCircle, { IntervalCircleHandler } from '@/components/IntervalCircle'
 import { SlippageAdjuster } from '@/components/SlippageAdjuster'
 import { SlippageSettingField } from '@/components/SlippageAdjuster/SlippageSettingField'
@@ -60,7 +60,7 @@ export default function RemoveLiquidityModal({
   const featureDisabled = useAppStore((s) => s.featureDisabled.removeConcentratedPosition)
   const removeLiquidityAct = useClmmStore((s) => s.removeLiquidityAct)
   const { getPriceAndAmount } = useClmmBalance({})
-  const sliderRef = useRef({ changeValue: (_val: number) => {} })
+  const sliderRef = useRef({ changeValue: (_val: number) => { } })
   const focusARef = useRef(true)
   const [decimalA, decimalB] = [poolInfo.mintA.decimals, poolInfo.mintB.decimals]
   const { amountSlippageA, amountSlippageB } = getPriceAndAmount({ poolInfo, position })

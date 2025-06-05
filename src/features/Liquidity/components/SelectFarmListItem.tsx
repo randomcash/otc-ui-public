@@ -1,6 +1,6 @@
 import { Badge, Box, Flex, HStack, SimpleGrid, Text } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
-import { ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token } from '@rbx/rbx-sdk'
 
 import TokenAvatar from '@/components/TokenAvatar'
 import TokenAvatarPair from '@/components/TokenAvatarPair'
@@ -41,8 +41,8 @@ export default function SelectFarmListItem({ farm, currentSelectedId }: SelectFa
             {farm.type === FarmType.Ecosystem
               ? t('badge.ecosystem')
               : farm.type === FarmType.Fusion
-              ? t('badge.fusion')
-              : t('badge.raydium')}
+                ? t('badge.fusion')
+                : t('badge.raydium')}
           </Badge>
         </Box>
       </Box>

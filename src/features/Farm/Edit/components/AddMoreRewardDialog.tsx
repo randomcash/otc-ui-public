@@ -15,7 +15,7 @@ import {
   VStack,
   useDisclosure
 } from '@chakra-ui/react'
-import { TokenInfo } from '@raydium-io/raydium-sdk-v2'
+import { TokenInfo } from '@rbx/rbx-sdk'
 import Decimal from 'decimal.js'
 
 import Button from '@/components/Button'
@@ -27,7 +27,7 @@ import { useAppStore, useTokenAccountStore } from '@/store'
 import { EditReward } from '../util'
 import useAddNewRewardSchema from '../schema/useAddNewRewardSchema'
 import dayjs from 'dayjs'
-import { ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token } from '@rbx/rbx-sdk'
 import DatePickerModal from '@/components/FarmDatePickerModal'
 import { formatToRawLocaleStr } from '@/utils/numberish/formatter'
 import { wSolToSol, wsolToSolToken } from '@/utils/token'
@@ -62,14 +62,14 @@ export default function AddMoreRewardDialog({
     isNewData
       ? defaultRewardInfo
       : {
-          mint: defaultRewardInfo.mint,
-          status: 'updated',
-          total: '',
-          openTime: 0,
-          endTime: 0,
-          perWeek: isEcoSystemAddMore ? defaultRewardInfo.perWeek : '',
-          apr: 0
-        }
+        mint: defaultRewardInfo.mint,
+        status: 'updated',
+        total: '',
+        openTime: 0,
+        endTime: 0,
+        perWeek: isEcoSystemAddMore ? defaultRewardInfo.perWeek : '',
+        apr: 0
+      }
   )
   const rewardToken = rewardInfo.mint
   const { isOpen: isDatePickerOpen, onClose: onCloseDatePicker, onOpen: onOpenDatePicker } = useDisclosure()
@@ -214,8 +214,8 @@ export default function AddMoreRewardDialog({
               <Text color={colors.textSecondary} fontSize="xl" fontWeight={500} mt={1}>
                 {rewardInfo.perWeek
                   ? formatToRawLocaleStr(
-                      new Decimal(rewardInfo.perWeek || 0).toDecimalPlaces(rewardInfo.mint?.decimals || 6, Decimal.ROUND_FLOOR).toString()
-                    )
+                    new Decimal(rewardInfo.perWeek || 0).toDecimalPlaces(rewardInfo.mint?.decimals || 6, Decimal.ROUND_FLOOR).toString()
+                  )
                   : '--'}{' '}
                 {rewardInfo.mint?.symbol}
               </Text>

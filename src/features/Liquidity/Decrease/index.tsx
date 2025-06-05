@@ -1,5 +1,5 @@
 import { Box, Grid, GridItem, HStack, Text, VStack } from '@chakra-ui/react'
-import { ApiV3PoolInfoStandardItem, CREATE_CPMM_POOL_PROGRAM } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3PoolInfoStandardItem, CREATE_CPMM_POOL_PROGRAM } from '@rbx/rbx-sdk'
 import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Tabs from '@/components/Tabs'
@@ -63,13 +63,13 @@ export default function Decrease() {
   const rpcPoolData =
     rpcAmmPoolData || rpcCpmmPoolData
       ? {
-          baseReserve: isCpmm ? rpcCpmmPoolData!.baseReserve : rpcAmmPoolData!.baseReserve,
-          quoteReserve: isCpmm ? rpcCpmmPoolData!.quoteReserve : rpcAmmPoolData!.quoteReserve,
-          baseDecimals: isCpmm ? rpcCpmmPoolData!.mintDecimalA : rpcAmmPoolData!.baseDecimals,
-          quoteDecimals: isCpmm ? rpcCpmmPoolData!.mintDecimalB : rpcAmmPoolData!.quoteDecimals,
-          lpSupply: isCpmm ? rpcCpmmPoolData!.lpAmount : rpcAmmPoolData!.lpSupply,
-          lpDecimals: isCpmm ? rpcCpmmPoolData!.lpDecimals : rpcAmmPoolData!.lpDecimals
-        }
+        baseReserve: isCpmm ? rpcCpmmPoolData!.baseReserve : rpcAmmPoolData!.baseReserve,
+        quoteReserve: isCpmm ? rpcCpmmPoolData!.quoteReserve : rpcAmmPoolData!.quoteReserve,
+        baseDecimals: isCpmm ? rpcCpmmPoolData!.mintDecimalA : rpcAmmPoolData!.baseDecimals,
+        quoteDecimals: isCpmm ? rpcCpmmPoolData!.mintDecimalB : rpcAmmPoolData!.quoteDecimals,
+        lpSupply: isCpmm ? rpcCpmmPoolData!.lpAmount : rpcAmmPoolData!.lpSupply,
+        lpDecimals: isCpmm ? rpcCpmmPoolData!.lpDecimals : rpcAmmPoolData!.lpDecimals
+      }
       : undefined
 
   const handleStakedChange = useCallback((val: string) => setStakedLiquidity(val), [])

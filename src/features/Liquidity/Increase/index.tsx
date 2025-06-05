@@ -1,7 +1,7 @@
 import { ReactNode, useCallback, useEffect, useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Flex, Grid, GridItem, HStack, Text, TooltipProps, VStack, useDisclosure } from '@chakra-ui/react'
-import { ApiV3PoolInfoStandardItem, ApiV3Token, TokenInfo, CREATE_CPMM_POOL_PROGRAM } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3PoolInfoStandardItem, ApiV3Token, TokenInfo, CREATE_CPMM_POOL_PROGRAM } from '@rbx/rbx-sdk'
 import Decimal from 'decimal.js'
 
 import Tabs, { TabItem } from '@/components/Tabs'
@@ -225,10 +225,10 @@ export default function Increase() {
                 pool={
                   pool && rpcData
                     ? {
-                        ...pool,
-                        mintAmountA: new Decimal(rpcData.baseReserve.toString()).div(10 ** pool.mintA.decimals).toNumber(),
-                        mintAmountB: new Decimal(rpcData.quoteReserve.toString()).div(10 ** pool.mintB.decimals).toNumber()
-                      }
+                      ...pool,
+                      mintAmountA: new Decimal(rpcData.baseReserve.toString()).div(10 ** pool.mintA.decimals).toNumber(),
+                      mintAmountB: new Decimal(rpcData.quoteReserve.toString()).div(10 ** pool.mintB.decimals).toNumber()
+                    }
                     : pool
                 }
                 aprData={aprData}
@@ -286,10 +286,10 @@ export default function Increase() {
               pool={
                 pool && rpcData
                   ? {
-                      ...pool,
-                      mintAmountA: new Decimal(rpcData.baseReserve.toString()).div(10 ** pool.mintA.decimals).toNumber(),
-                      mintAmountB: new Decimal(rpcData.quoteReserve.toString()).div(10 ** pool.mintB.decimals).toNumber()
-                    }
+                    ...pool,
+                    mintAmountA: new Decimal(rpcData.baseReserve.toString()).div(10 ** pool.mintA.decimals).toNumber(),
+                    mintAmountB: new Decimal(rpcData.quoteReserve.toString()).div(10 ** pool.mintB.decimals).toNumber()
+                  }
                   : pool
               }
               aprData={aprData}

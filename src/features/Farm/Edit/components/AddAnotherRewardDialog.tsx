@@ -20,7 +20,7 @@ import {
   VStack,
   useDisclosure
 } from '@chakra-ui/react'
-import { ApiV3Token, TokenInfo } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token, TokenInfo } from '@rbx/rbx-sdk'
 import dayjs from 'dayjs'
 import Decimal from 'decimal.js'
 import { useMemo, useState } from 'react'
@@ -190,8 +190,8 @@ export default function AddAnotherRewardDialog({
               <Text color={colors.textSecondary} fontSize="xl" fontWeight={500} mt={1}>
                 {rewardInfo.perWeek
                   ? formatToRawLocaleStr(
-                      new Decimal(rewardInfo.perWeek || 0).toDecimalPlaces(rewardInfo.mint?.decimals || 6, Decimal.ROUND_FLOOR).toString()
-                    )
+                    new Decimal(rewardInfo.perWeek || 0).toDecimalPlaces(rewardInfo.mint?.decimals || 6, Decimal.ROUND_FLOOR).toString()
+                  )
                   : '--'}{' '}
                 {rewardInfo.mint?.symbol}
               </Text>

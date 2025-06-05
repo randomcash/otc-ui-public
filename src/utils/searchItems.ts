@@ -1,4 +1,4 @@
-import { isNumber, MayFunction } from '@raydium-io/raydium-sdk-v2'
+import { isNumber, MayFunction } from '@rbx/rbx-sdk'
 import { isObject, isString } from './judges/judgeType'
 import { shakeUndefindedItem } from './shakeUndefindedItem'
 import { shrinkToValue } from './shrinkToValue'

@@ -43,7 +43,7 @@ import { useReferrerQuery } from './utils'
 import { DropdownSelectMenu } from '@/components/DropdownSelectMenu'
 import useConfigs, { ConfigApiData } from '@/hooks/launchpad/useConfigs'
 import { usePlatformInfo } from '@/hooks/launchpad/usePlatformInfo'
-import { LaunchpadPoolInitParam, FEE_RATE_DENOMINATOR_VALUE, Curve } from '@raydium-io/raydium-sdk-v2'
+import { LaunchpadPoolInitParam, FEE_RATE_DENOMINATOR_VALUE, Curve } from '@rbx/rbx-sdk'
 import { encodeStr } from '@/utils/common'
 import Tabs from '@/components/Tabs'
 import { CurveAreaChart } from './components/Charts/CurveAreaChart'
@@ -1408,11 +1408,11 @@ const LaunchLabForm = () => {
                         value={
                           values.tokenSoldPercent || values.lockedPercent
                             ? new Decimal(100)
-                                .sub(values.tokenSoldPercent || '0')
-                                .sub(values.lockedPercent || '0')
-                                .clampedTo(0, 100)
-                                .toDecimalPlaces(2)
-                                .toString()
+                              .sub(values.tokenSoldPercent || '0')
+                              .sub(values.lockedPercent || '0')
+                              .clampedTo(0, 100)
+                              .toDecimalPlaces(2)
+                              .toString()
                             : ''
                         }
                         parse={handleParseVal(2)}
@@ -1539,9 +1539,8 @@ const LaunchLabForm = () => {
                       <Tooltip
                         hasArrow
                         placement="top"
-                        label={`After the token graduates, token creators can claim ${
-                          platformInfo ? (Number(platformInfo.creatorScale) / 1000000) * 100 : 10
-                        }% of LP fees from AMM pool trades.`}
+                        label={`After the token graduates, token creators can claim ${platformInfo ? (Number(platformInfo.creatorScale) / 1000000) * 100 : 10
+                          }% of LP fees from AMM pool trades.`}
                       >
                         <HelpCircle size={12} color={colors.lightPurple} />
                       </Tooltip>

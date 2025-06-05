@@ -17,7 +17,7 @@ import {
   CircularProgress,
   Tooltip as ChakraTip
 } from '@chakra-ui/react'
-import { ApiV3Token, RAYMint, SOL_INFO, TokenInfo, TransferFeeDataBaseType } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token, RAYMint, SOL_INFO, TokenInfo, TransferFeeDataBaseType } from '@rbx/rbx-sdk'
 import { PublicKey } from '@solana/web3.js'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -85,29 +85,29 @@ export function SwapPanel({
   const { tokenInfo: unknownTokenA } = useTokenInfo({
     mint: isTokenLoaded && !tokenInput && inputMint ? inputMint : undefined
   })
-  const tokenAActionRef = useRef<InputActionRef>({ refreshPrice: () => {} })
+  const tokenAActionRef = useRef<InputActionRef>({ refreshPrice: () => { } })
   const { tokenInfo: unknownTokenB } = useTokenInfo({
     mint: isTokenLoaded && !tokenOutput && outputMint ? outputMint : undefined
   })
-  const tokenBActionRef = useRef<InputActionRef>({ refreshPrice: () => {} })
+  const tokenBActionRef = useRef<InputActionRef>({ refreshPrice: () => { } })
 
   const { tokenInfo: inputInfo } = useTokenInfo(
     tokenInput?.type === 'jupiter'
       ? {
-          mint: tokenInput.address,
-          programId: ToPublicKey(tokenInput.programId),
-          skipTokenMap: true
-        }
+        mint: tokenInput.address,
+        programId: ToPublicKey(tokenInput.programId),
+        skipTokenMap: true
+      }
       : {}
   )
 
   const { tokenInfo: outputInfo } = useTokenInfo(
     tokenOutput?.type === 'jupiter'
       ? {
-          mint: tokenOutput.address,
-          programId: ToPublicKey(tokenOutput.programId),
-          skipTokenMap: true
-        }
+        mint: tokenOutput.address,
+        programId: ToPublicKey(tokenOutput.programId),
+        skipTokenMap: true
+      }
       : {}
   )
   const [inputFeeConfig, outputFeeConfig] = [

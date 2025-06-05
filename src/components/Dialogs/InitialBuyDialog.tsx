@@ -19,7 +19,7 @@ import { detectedSeparator, trimTrailZero } from '@/utils/numberish/formatter'
 import { useDisclosure } from '@/hooks/useDelayDisclosure'
 import { useLaunchpadStore } from '@/store'
 import shallow from 'zustand/shallow'
-import { LaunchpadPoolInfo, Curve, LaunchpadPoolInitParam } from '@raydium-io/raydium-sdk-v2'
+import { LaunchpadPoolInfo, Curve, LaunchpadPoolInitParam } from '@rbx/rbx-sdk'
 import { Keypair } from '@solana/web3.js'
 import BN from 'bn.js'
 import Decimal from 'decimal.js'
@@ -212,9 +212,9 @@ export const InitialBuyDialog = ({ setIsOpen, configInfo, ...mintData }: DialogP
           isLight
             ? {}
             : {
-                border: '1px solid #0B1022',
-                boxShadow: ' 0px 8px 48px 0px #4F53F31A;'
-              }
+              border: '1px solid #0B1022',
+              boxShadow: ' 0px 8px 48px 0px #4F53F31A;'
+            }
         }
       >
         <Flex justifyContent="space-between" alignItems="center">

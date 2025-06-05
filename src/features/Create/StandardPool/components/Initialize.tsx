@@ -15,7 +15,7 @@ import {
   solToWSol,
   CREATE_CPMM_POOL_PROGRAM,
   ApiV3PoolInfoStandardItemCpmm
-} from '@raydium-io/raydium-sdk-v2'
+} from '@rbx/rbx-sdk'
 import { DatePick, HourPick, MinutePick } from '@/components/DateTimePicker'
 import DecimalInput from '@/components/DecimalInput'
 import Button from '@/components/Button'
@@ -117,17 +117,17 @@ export default function Initialize({ isAmmV4 }: { isAmmV4: boolean }) {
     new Decimal(tokenAmount.base || 0).lte(0) || new Decimal(tokenAmount.quote || 0).lte(0)
       ? ''
       : new Decimal(tokenAmount[baseIn ? 'quote' : 'base'] || 0)
-          .div(tokenAmount[baseIn ? 'base' : 'quote'] || 1)
-          .toDecimalPlaces(baseToken?.decimals ?? 6)
-          .toString()
+        .div(tokenAmount[baseIn ? 'base' : 'quote'] || 1)
+        .toDecimalPlaces(baseToken?.decimals ?? 6)
+        .toString()
 
   const currentPrice =
     !tokenPrices[inputMint] || !tokenPrices[outputMint]
       ? ''
       : new Decimal(tokenPrices[baseIn ? inputMint : outputMint].value || 0)
-          .div(tokenPrices[baseIn ? outputMint : inputMint].value || 1)
-          .toDecimalPlaces(baseToken?.decimals ?? 6)
-          .toString()
+        .div(tokenPrices[baseIn ? outputMint : inputMint].value || 1)
+        .toDecimalPlaces(baseToken?.decimals ?? 6)
+        .toString()
 
   const error = useInitPoolSchema({ baseToken, quoteToken, tokenAmount, startTime: startDate, feeConfig: currentConfig, isAmmV4 })
 

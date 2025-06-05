@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { Minus, Plus } from 'react-feather'
-import { ApiV3PoolInfoConcentratedItem, ApiV3Token, solToWSol } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3PoolInfoConcentratedItem, ApiV3Token, solToWSol } from '@rbx/rbx-sdk'
 import { Box, Text, Flex, HStack, VStack, SimpleGrid, Skeleton } from '@chakra-ui/react'
 import shallow from 'zustand/shallow'
 import DecimalInput from '@/components/DecimalInput'
@@ -113,9 +113,9 @@ export default function SetPriceAndRange({
   const onlinePrice =
     tokenBase && tokenQuote && priceBase?.value && priceQuote?.value
       ? new Decimal((priceReverse ? priceBase.value : priceQuote.value) || 0)
-          .div((priceReverse ? priceQuote.value : priceBase.value) || 1)
-          .toDecimalPlaces((priceReverse ? tokenQuote.decimals : tokenBase.decimals) || 6)
-          .toString()
+        .div((priceReverse ? priceQuote.value : priceBase.value) || 1)
+        .toDecimalPlaces((priceReverse ? tokenQuote.decimals : tokenBase.decimals) || 6)
+        .toString()
       : '-- '
 
   const tickPriceRef = useRef<TickData>({})
@@ -283,12 +283,12 @@ export default function SetPriceAndRange({
               <Text>
                 {isFullRange
                   ? `${formatCurrency(new Decimal(fullRangeTickRef.current.priceLower || 0).toFixed(24), {
-                      maximumDecimalTrailingZeroes: 5,
-                      abbreviated: true
-                    })} - ${formatCurrency(new Decimal(fullRangeTickRef.current.priceUpper || 0).toFixed(24), {
-                      maximumDecimalTrailingZeroes: 5,
-                      abbreviated: true
-                    })}`
+                    maximumDecimalTrailingZeroes: 5,
+                    abbreviated: true
+                  })} - ${formatCurrency(new Decimal(fullRangeTickRef.current.priceUpper || 0).toFixed(24), {
+                    maximumDecimalTrailingZeroes: 5,
+                    abbreviated: true
+                  })}`
                   : `${formatToRawLocaleStr(priceRange[0])} - ${formatToRawLocaleStr(priceRange[1])}`}
               </Text>
               <Text>

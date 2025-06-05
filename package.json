@@ -1,8 +1,8 @@
 {
-  "name": "raydium-ui-v3",
+  "name": "rbx-ui",
   "version": "0.0.1",
-  "author": "Solana Maintainers <maintainers@solana.foundation>",
-  "repository": "https://github.com/solana-labs/wallet-adapter",
+  "author": "Gus <randomcash@tutanota.com",
+  "repository": "",
   "license": "Apache-2.0",
   "engines": {
     "node": ">=16"
@@ -55,7 +55,6 @@
     "@moonpay/moonpay-js": "^0.6.1",
     "@next/third-parties": "^14.2.5",
     "@project-serum/serum": "^0.13.65",
-    "@raydium-io/raydium-sdk-v2": "0.1.126-alpha",
     "@sentry/nextjs": "^8.26.0",
     "@solana/buffer-layout": "^4.0.1",
     "@solana/spl-token": "^0.4.8",
@@ -66,7 +65,7 @@
     "@solana/wallet-adapter-react-ui": "^0.9.31",
     "@solana/wallet-adapter-slope": "^0.5.21",
     "@solana/wallet-adapter-wallets": "^0.19.32",
-    "@solana/web3.js": "^1.95.3",
+    "@solana/web3.js": ">=1.95.3",
     "@solflare-wallet/wallet-adapter": "^1.0.4",
     "@tiplink/wallet-adapter": "^2.1.19",
     "@types/big.js": "^6.1.6",
@@ -99,6 +98,7 @@
     "immer": "^9.0.15",
     "lightweight-charts": "^4.0.1",
     "next": "13.3.1",
+    "@rbx/rbx-sdk": "file:../otcpof-sdk",
     "react": "^18.0.0",
     "react-day-picker": "^8.8.0",
     "react-device-detect": "^2.2.3",

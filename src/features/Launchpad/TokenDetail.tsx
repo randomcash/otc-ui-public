@@ -15,7 +15,7 @@ import Transactions from './components/Transactions'
 import Holders from './components/Holders'
 import ConnectedButton from '@/components/ConnectedButton'
 import useCheckToken from '@/hooks/launchpad/useCheckToken'
-import { getATAAddress, getPdaLaunchpadVaultId, LaunchpadPoolInfo, Curve } from '@raydium-io/raydium-sdk-v2'
+import { getATAAddress, getPdaLaunchpadVaultId, LaunchpadPoolInfo, Curve } from '@rbx/rbx-sdk'
 import { PublicKey } from '@solana/web3.js'
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token'
 import usePoolRpcInfo, { getMarketCapData } from '@/hooks/launchpad/usePoolRpcInfo'
@@ -161,10 +161,10 @@ const TokenDetail = () => {
   const marketCap =
     poolInfo && mintInfo && mintB && data[mintB]
       ? getMarketCapData({
-          poolInfo,
-          mintInfo,
-          mintBPrice: new Decimal(data[mintB].value)
-        })
+        poolInfo,
+        mintInfo,
+        mintBPrice: new Decimal(data[mintB].value)
+      })
       : undefined
 
   const creator = mintInfo?.creator
@@ -178,7 +178,7 @@ const TokenDetail = () => {
 
   const defaultTab = useMemo(() => (isMobile ? Tab.Info : Tab.Comments), [])
   const [value, setValue] = useState(defaultTab)
-  const commentRef = useRef<CommentAction>({ loadNewComments: () => {} })
+  const commentRef = useRef<CommentAction>({ loadNewComments: () => { } })
 
   const panelItems = useMemo(() => {
     const baseItems = [
@@ -443,8 +443,8 @@ const TokenDetail = () => {
             sx={
               isLight
                 ? {
-                    border: '1px solid #BFD2FF80'
-                  }
+                  border: '1px solid #BFD2FF80'
+                }
                 : {}
             }
           >
@@ -482,18 +482,18 @@ const TokenDetail = () => {
         sx={
           isMobile
             ? {
-                '.chakra-tabs ': {
-                  borderRadius: '4px'
-                },
-                button: {
-                  px: 3
-                }
+              '.chakra-tabs ': {
+                borderRadius: '4px'
+              },
+              button: {
+                px: 3
               }
+            }
             : isLight
-            ? {
+              ? {
                 border: '1px solid #BFD2FF80'
               }
-            : {}
+              : {}
         }
       >
         {isMobile ? (

@@ -10,7 +10,7 @@ import WarningIcon from '@/icons/misc/WarningIcon'
 import { colors } from '@/theme/cssVariables'
 import toPercentString from '@/utils/numberish/toPercentString'
 import { Box, Collapse, Flex, HStack, Text, Skeleton } from '@chakra-ui/react'
-import { TokenInfo } from '@raydium-io/raydium-sdk-v2'
+import { TokenInfo } from '@rbx/rbx-sdk'
 import { Fragment, useState, useRef, RefObject, useEffect } from 'react'
 import { ChevronDown } from 'react-feather'
 import { useTranslation } from 'react-i18next'
@@ -145,26 +145,26 @@ function PriceDetector({
     ? computedSwapResult.priceImpactPct > 5
       ? 'high'
       : computedSwapResult.priceImpactPct > 1
-      ? 'warning'
-      : 'low'
+        ? 'warning'
+        : 'low'
     : undefined
 
   let price = computedSwapResult
     ? trimTrailZero(
-        new Decimal(computedSwapResult.outputAmount)
-          .div(10 ** (tokenOutput?.decimals || 0))
-          .div(new Decimal(computedSwapResult.inputAmount).div(10 ** (tokenInput?.decimals || 0)))
-          .toFixed(tokenOutput?.decimals || 0, Decimal.ROUND_FLOOR)
-      )!
+      new Decimal(computedSwapResult.outputAmount)
+        .div(10 ** (tokenOutput?.decimals || 0))
+        .div(new Decimal(computedSwapResult.inputAmount).div(10 ** (tokenInput?.decimals || 0)))
+        .toFixed(tokenOutput?.decimals || 0, Decimal.ROUND_FLOOR)
+    )!
     : ''
   if (reverse)
     price =
       price === ''
         ? price
         : new Decimal(1)
-            .div(price)
-            .toDecimalPlaces(tokenInput?.decimals || 0, Decimal.ROUND_FLOOR)
-            .toString()
+          .div(price)
+          .toDecimalPlaces(tokenInput?.decimals || 0, Decimal.ROUND_FLOOR)
+          .toString()
 
   return (
     <HStack>
@@ -258,8 +258,8 @@ function MinimumReceiveValue({ tokenOutput, amount }: { tokenOutput?: TokenInfo;
       <Text color={colors.textPrimary}>
         {amount && tokenOutput
           ? formatCurrency(new Decimal(amount).div(10 ** tokenOutput.decimals).toFixed(tokenOutput.decimals, Decimal.ROUND_FLOOR), {
-              decimalPlaces: tokenOutput?.decimals
-            })
+            decimalPlaces: tokenOutput?.decimals
+          })
           : formatCurrency(amount)}
       </Text>
       <Text color={colors.textSecondary}>{tokenOutput?.symbol}</Text>

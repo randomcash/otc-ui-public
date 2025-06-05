@@ -4,7 +4,7 @@ import { TimeType } from '@/hooks/pool/useFetchPoolKLine'
 import { colors } from '@/theme/cssVariables'
 import toPercentString from '@/utils/numberish/toPercentString'
 import { Grid, GridItem, HStack, Text, Box } from '@chakra-ui/react'
-import { ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token } from '@rbx/rbx-sdk'
 import { useState } from 'react'
 import CandleChart from './CandleChart'
 import dayjs from 'dayjs'
@@ -28,9 +28,9 @@ export function SwapKlinePanel({
 }) {
   const [price, setPrice] = useState<
     | {
-        current: number
-        change: number
-      }
+      current: number
+      change: number
+    }
     | undefined
   >()
 

@@ -16,7 +16,7 @@ import {
   Text,
   VStack
 } from '@chakra-ui/react'
-import { ApiV3Token, wSolToSolToken } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token, wSolToSolToken } from '@rbx/rbx-sdk'
 import Button from '@/components/Button'
 import CalloutNote from '@/components/CalloutNote'
 import DecimalInput from '@/components/DecimalInput'
@@ -85,10 +85,10 @@ export default function AdjustRewardDialog({
   const newApr =
     moreAmount || daysExtend
       ? newPerSecond
-          .mul(DAY_SECONDS * 365)
-          .mul(tokenPrices[rewardToken.address]?.value || 0)
-          .div(farmTVL || 1)
-          .toNumber()
+        .mul(DAY_SECONDS * 365)
+        .mul(tokenPrices[rewardToken.address]?.value || 0)
+        .div(farmTVL || 1)
+        .toNumber()
       : oldReward.apr
 
   const error = useAdjustRewardSchema({

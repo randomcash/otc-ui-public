@@ -49,7 +49,7 @@ export function CreatePoolEntryDialog({
     switch (type) {
 
       case 'standard':
-        to = '/liquidity/create-farm'
+        to = '/liquidity/create-pool'
         break
       default:
         break
@@ -146,8 +146,7 @@ function CreatePoolEntryMobileDrawer({
 
 export function CreatePoolEntryDialogBody({ type, onChange }: { type: CreateTarget; onChange: (val: CreateTarget) => void }) {
   const { t } = useTranslation()
-  const isCreatePool = ['standard-amm'].includes(type)
-  const isCreateFarm = type === 'standard'
+  const isCreatePool = type === 'standard'
   return (
     <Flex direction="column" gap={4}>
       <CreateBlock
@@ -185,23 +184,6 @@ export function CreatePoolEntryDialogBody({ type, onChange }: { type: CreateTarg
             )
             : undefined
         }
-      />
-      <CreateBlock
-        title={t('farm.create')}
-        description={
-          isCreateFarm ? (
-            <Trans i18nKey="create_pool.modal_section_header_farm_desc">
-              <Link href="https://docs.raydium.io/raydium/pool-creation/creating-a-clmm-pool-and-farm" isExternal>
-                CLMM
-              </Link>
-              <Link href="https://docs.raydium.io/raydium/pool-creation/creating-a-standard-amm-pool/creating-an-ecosystem-farm" isExternal>
-                Standard
-              </Link>
-            </Trans>
-          ) : null
-        }
-        selected={isCreateFarm}
-        onClick={() => onChange('standard')}
       />
     </Flex>
   )

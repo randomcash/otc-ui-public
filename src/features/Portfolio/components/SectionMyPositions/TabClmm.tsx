@@ -9,7 +9,7 @@ import { colors } from '@/theme/cssVariables'
 import { Box, Flex, Text } from '@chakra-ui/react'
 import { ClmmPositionItemsCard } from './components/Clmm/ClmmPositionItemsCard'
 import { openCache } from './components/Clmm/ClmmPositionAccountItem'
-import { ApiV3PoolInfoConcentratedItem } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3PoolInfoConcentratedItem } from '@rbx/rbx-sdk'
 import { ClmmLockInfo } from '@/hooks/portfolio/clmm/useClmmBalance'
 
 const ClmmMyPositionTabContent = memo(
@@ -86,10 +86,10 @@ const ClmmMyPositionTabContent = memo(
               initRpcPoolData={
                 dataMap[data[0]]
                   ? {
-                      poolId: data[0],
-                      currentPrice: dataMap[data[0]].currentPrice.toNumber(),
-                      poolInfo: dataMap[data[0]]
-                    }
+                    poolId: data[0],
+                    currentPrice: dataMap[data[0]].currentPrice.toNumber(),
+                    poolInfo: dataMap[data[0]]
+                  }
                   : undefined
               }
               setNoRewardClmmPos={setNoRewardClmmPos}
