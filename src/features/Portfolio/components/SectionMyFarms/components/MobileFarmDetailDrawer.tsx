@@ -23,20 +23,19 @@ export default function MobileFarmDetailDrawer({
   tvl,
   apr,
   decimals,
-  rewardsInfo
-}: {
-  isOpen: boolean
-  onClose: () => void
-  name: string
-  baseToken: ApiV3Token
-  quoteToken: ApiV3Token
-  id: string
-  type: FarmCategory
-  tvl: number
-  apr: number
-  decimals: number
-  rewardsInfo: RewardInfo[]
-}) {
+  rewardsInfo }: {
+    isOpen: boolean
+    onClose: () => void
+    name: string
+    baseToken: ApiV3Token
+    quoteToken: ApiV3Token
+    id: string
+    type: FarmCategory
+    tvl: number
+    apr: number
+    decimals: number
+    rewardsInfo: RewardInfo[]
+  }) {
   const { t } = useTranslation()
   const isStandard = type === FarmCategory.Standard
   return (

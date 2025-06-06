@@ -211,7 +211,7 @@ function FarmItemHeader({ name, baseToken, quoteToken, id, type, feeRate }: Farm
 
       {type && <Badge variant="crooked">{isMobile ? type.slice(0, 1) : type}</Badge>}
 
-      {type === FarmCategory.Clmm && feeRate ? (
+      {type === FarmCategory.Standard && feeRate ? (
         <Tag size="sm" variant="rounded">
           {formatToRawLocaleStr(feeRate * 100)}%
         </Tag>
