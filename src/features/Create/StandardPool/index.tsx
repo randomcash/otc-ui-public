@@ -7,17 +7,12 @@ import ChevronLeftIcon from '@/icons/misc/ChevronLeftIcon'
 import { useAppStore } from '@/store'
 import { genCSS2GridTemplateColumns, genCSS3GridTemplateColumns } from '@/theme/detailConfig'
 import { useTranslation, Trans } from 'react-i18next'
-import { useRouteQuery } from '@/utils/routeTools'
 import Initialize from './components/Initialize'
 
 export default function CreatePool() {
   const isMobile = useAppStore((s) => s.isMobile)
   const { t } = useTranslation()
   const router = useRouter()
-  const { type: poolType } = useRouteQuery<{
-    type?: string
-  }>()
-  const isAmmV4 = poolType === 'legacy-amm'
 
   return (
     <Grid
@@ -83,7 +78,7 @@ export default function CreatePool() {
       <GridItem area="word" display={['none', 'unset']}>
         <Flex justify="left">
           <Text whiteSpace={'pre-line'} w="fit-content" cursor="pointer" color={colors.textSecondary} fontWeight="500" fontSize="xl">
-            {isAmmV4 ? t('create_standard_pool.initialize_amm_v4_pool') : t('create_standard_pool.initialize_cpmm_pool')}
+            {t('create_standard_pool.initialize_cpmm_pool')}
           </Text>
         </Flex>
       </GridItem>
@@ -91,7 +86,7 @@ export default function CreatePool() {
       <GridItem area="panel">
         <PanelCard bg={'transparent'} overflow={'hidden'}>
           <VStack spacing={4}>
-            <Initialize isAmmV4={isAmmV4} />
+            <Initialize />
           </VStack>
         </PanelCard>
       </GridItem>

@@ -6,8 +6,6 @@ import { ApiCpmmConfigInfo, ApiV3Token } from '@rbx/rbx-sdk'
 import { wSolToSol } from '@/utils/token'
 import { useTokenAccountStore } from '@/store/useTokenAccountStore'
 import { TFunction } from 'i18next'
-import BN from 'bn.js'
-import { TOKEN_2022_PROGRAM_ID } from '@solana/spl-token'
 
 const numberTransform = yup.number().transform((value) => (isNaN(value) ? 0 : value))
 const numberSchema = (errMsg: string) => numberTransform.moreThan(0, errMsg).required(errMsg)
@@ -18,12 +16,11 @@ interface Props {
   quoteToken?: ApiV3Token
   baseToken?: ApiV3Token
   feeConfig?: ApiCpmmConfigInfo
-  isAmmV4?: boolean
 }
 
 // new BN(baseAmount).mul(new BN(quoteAmount)).gt(new BN(1).mul(new BN(10 ** baseToken.decimals)).pow(new BN(2)))
 
-export default function useInitPoolSchema({ startTime, baseToken, quoteToken, tokenAmount, feeConfig, isAmmV4 }: Props) {
+export default function useInitPoolSchema({ startTime, baseToken, quoteToken, tokenAmount, feeConfig }: Props) {
   // prepare for i18n usage
   const { t } = useTranslation()
 
@@ -35,19 +32,7 @@ export default function useInitPoolSchema({ startTime, baseToken, quoteToken, to
 
   const schema = (t: TFunction<'translation', undefined, 'translation'>) =>
     yup.object().shape({
-      ...(isAmmV4 ? {} : { feeConfig: yup.mixed().required(t('common.select') + t('field.fee_tier') ?? '') }),
-      ...(isAmmV4
-        ? {
-            liquidity: yup.mixed().test('is-liquidity-valid', t('error.initial_liquidity_low') ?? 'initial liquidity too low', function () {
-              if (this.parent.baseToken && this.parent.quoteToken && this.parent.baseAmount && this.parent.quoteAmount) {
-                return new BN(new Decimal(this.parent.baseAmount).mul(10 ** this.parent.baseToken.decimals).toFixed(0))
-                  .mul(new BN(new Decimal(this.parent.quoteAmount).mul(10 ** this.parent.quoteToken.decimals).toFixed(0)))
-                  .gt(new BN(1).mul(new BN(10 ** this.parent.baseToken.decimals)).pow(new BN(2)))
-              }
-              return true
-            })
-          }
-        : {}),
+      ...{ feeConfig: yup.mixed().required(t('common.select') + t('field.fee_tier') ?? '') },
       startTime: yup.mixed().test('is-date-valid', t('error.start_time_should_later') ?? '', function (val: Date) {
         return !val || val.valueOf() > Date.now()
       }),
@@ -69,10 +54,6 @@ export default function useInitPoolSchema({ startTime, baseToken, quoteToken, to
           'is-mint-prgoram-valid',
           (t('error.amm_not_support_2022') || 'Amm V4 pool does not support token 2022') + ' (Quote Mint)',
           function () {
-            if (!isAmmV4) return true
-            if (this.parent.quoteToken && this.parent.quoteToken.programId === TOKEN_2022_PROGRAM_ID.toBase58()) {
-              return false
-            }
             return true
           }
         ),
@@ -83,10 +64,6 @@ export default function useInitPoolSchema({ startTime, baseToken, quoteToken, to
           'is-mint-prgoram-valid',
           (t('error.amm_not_support_2022') || 'Amm V4 pool does not support token 2022') + ' (Base mint)',
           function () {
-            if (!isAmmV4) return true
-            if (this.parent.baseToken && this.parent.baseToken.programId === TOKEN_2022_PROGRAM_ID.toBase58()) {
-              return false
-            }
             return true
           }
         ),

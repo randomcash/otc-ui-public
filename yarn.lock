@@ -5535,7 +5535,7 @@
   integrity sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==
 
 "@rbx/rbx-sdk@file:../otcpof-sdk":
-  version "0.0.1"
+  version "0.1.138-alpha"
   resolved "file:../otcpof-sdk"
   dependencies:
     "@solana/buffer-layout" "^4.0.1"

@@ -11,7 +11,8 @@ import {
   getCpmmPdaAmmConfigId,
   CpmmConfigInfoLayout,
   ApiCpmmConfigInfo,
-  CpmmLockExtInfo
+  CpmmLockExtInfo,
+  PriceFeed
 } from '@rbx/rbx-sdk'
 import { PublicKey } from '@solana/web3.js'
 import createStore from './createStore'
@@ -85,6 +86,7 @@ interface LiquidityStore {
       pool: {
         mintA: ApiV3Token
         mintB: ApiV3Token
+        priceFeed: PriceFeed
         feeConfig: ApiCpmmConfigInfo
       }
       baseAmount: string
@@ -140,7 +142,6 @@ interface LiquidityStore {
   }>
 
   getCreatePoolFeeAct: () => Promise<void>
-  fetchCpmmConfigsAct: () => void
 
   resetComputeStateAct: () => void
 }
@@ -641,24 +642,6 @@ export const useLiquidityStore = createStore<LiquidityStore>(
       const r = await connection.getAccountInfo(configId.publicKey, useAppStore.getState().commitment)
       if (r) {
         set({ createPoolFee: new Decimal(CpmmConfigInfoLayout.decode(r.data).createPoolFee.toString()).div(10 ** 9).toString() })
-      }
-    },
-
-    fetchCpmmConfigsAct: async () => {
-      const { raydium } = useAppStore.getState()
-      if (Object.keys(get().cpmmFeeConfigs).length || !raydium) return
-      try {
-        const res = await raydium.api.getCpmmConfigs()
-        const apiRes = res.reduce(
-          (acc, cur) => ({
-            ...acc,
-            [cur.id]: cur
-          }),
-          {}
-        )
-        set({ cpmmFeeConfigs: apiRes || {} }, false, { type: 'fetchCpmmConfigsAct' })
-      } catch {
-        set({ cpmmFeeConfigs: {} }, false, { type: 'fetchCpmmConfigsAct' })
       }
     },
 

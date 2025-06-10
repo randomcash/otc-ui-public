@@ -14,7 +14,8 @@ import {
   PoolFetchType,
   solToWSol,
   CREATE_CPMM_POOL_PROGRAM,
-  ApiV3PoolInfoStandardItemCpmm
+  ApiV3PoolInfoStandardItemCpmm,
+  PYTH_CRYPTO_SOL_USD
 } from '@rbx/rbx-sdk'
 import { DatePick, HourPick, MinutePick } from '@/components/DateTimePicker'
 import DecimalInput from '@/components/DecimalInput'
@@ -37,16 +38,20 @@ import CreateSuccessModal from './CreateSuccessModal'
 import useInitPoolSchema from '../hooks/useInitPoolSchema'
 import useBirdeyeTokenPrice from '@/hooks/token/useBirdeyeTokenPrice'
 import { useCreateMarketStore } from '@/store'
+import { usePriceFeedStore } from '@/store/usePriceFeedStore'
 
 import Decimal from 'decimal.js'
 import dayjs from 'dayjs'
 
-export default function Initialize({ isAmmV4 }: { isAmmV4: boolean }) {
+export default function Initialize() {
   const { t } = useTranslation()
   const tokenMap = useTokenStore((s) => s.tokenMap)
+  const priceFeedMap = usePriceFeedStore((p) => p.priceFeedMap)
   const [inputMint, setInputMint] = useState<string>(PublicKey.default.toBase58())
   const [outputMint, setOutputMint] = useState<string>(RAYMint.toBase58())
-  const [baseToken, quoteToken] = [tokenMap.get(inputMint), tokenMap.get(outputMint)]
+  const [inputPriceFeed] = useState<string>(PYTH_CRYPTO_SOL_USD.toBase58())
+
+  const [baseToken, quoteToken, priceFeed] = [tokenMap.get(inputMint), tokenMap.get(outputMint), priceFeedMap.get(inputPriceFeed)]
 
   const [createPoolAct, newCreatedPool] = useLiquidityStore((s) => [s.createPoolAct, s.newCreatedPool], shallow)
   const createMarketAndPoolAct = useCreateMarketStore((s) => s.createMarketAndPoolAct)
@@ -113,14 +118,6 @@ export default function Initialize({ isAmmV4 }: { isAmmV4: boolean }) {
   const [startDateMode, setStartDateMode] = useState<'now' | 'custom'>('now')
   const isStartNow = startDateMode === 'now'
 
-  const initialPrice =
-    new Decimal(tokenAmount.base || 0).lte(0) || new Decimal(tokenAmount.quote || 0).lte(0)
-      ? ''
-      : new Decimal(tokenAmount[baseIn ? 'quote' : 'base'] || 0)
-        .div(tokenAmount[baseIn ? 'base' : 'quote'] || 1)
-        .toDecimalPlaces(baseToken?.decimals ?? 6)
-        .toString()
-
   const currentPrice =
     !tokenPrices[inputMint] || !tokenPrices[outputMint]
       ? ''
@@ -129,7 +126,7 @@ export default function Initialize({ isAmmV4 }: { isAmmV4: boolean }) {
         .toDecimalPlaces(baseToken?.decimals ?? 6)
         .toString()
 
-  const error = useInitPoolSchema({ baseToken, quoteToken, tokenAmount, startTime: startDate, feeConfig: currentConfig, isAmmV4 })
+  const error = useInitPoolSchema({ baseToken, quoteToken, tokenAmount, startTime: startDate, feeConfig: currentConfig })
 
   useEffect(
     () => () => {
@@ -155,25 +152,11 @@ export default function Initialize({ isAmmV4 }: { isAmmV4: boolean }) {
 
   const onInitializeClick = () => {
     onLoading()
-    if (isAmmV4) {
-      let poolId = ''
-      createMarketAndPoolAct({
-        baseToken: solToWSolToken(baseToken!),
-        quoteToken: solToWSolToken(quoteToken!),
-        baseAmount: new Decimal(tokenAmount.base).mul(10 ** baseToken!.decimals).toFixed(0),
-        quoteAmount: new Decimal(tokenAmount.quote).mul(10 ** quoteToken!.decimals).toFixed(0),
-        startTime: startDate,
-        onSent: (data) => (poolId = data.ammId.toBase58()),
-        onConfirmed: () => setNewPoolId(poolId),
-        onError: onTxError,
-        onFinally: offLoading
-      })
-      return
-    }
     createPoolAct({
       pool: {
         mintA: solToWSolToken(baseToken!),
         mintB: solToWSolToken(quoteToken!),
+        priceFeed: priceFeed!,
         feeConfig: currentConfig!
       },
       baseAmount: new Decimal(tokenAmount.base).mul(10 ** baseToken!.decimals).toFixed(0),
@@ -221,19 +204,13 @@ export default function Initialize({ isAmmV4 }: { isAmmV4: boolean }) {
           </Text>
           <QuestionToolTip iconType="question" label={t('create_standard_pool.initial_price_tooltip')} />
         </HStack>
-        <DecimalInput
-          postFixInField
-          variant="filledDark"
-          readonly
-          value={initialPrice}
-          inputSx={{ pl: '4px', fontWeight: 500, fontSize: ['md', 'xl'] }}
-          ctrSx={{ bg: colors.backgroundDark, borderRadius: 'xl', pr: '14px', py: '6px' }}
-          inputGroupSx={{ w: '100%', bg: colors.backgroundDark, alignItems: 'center', borderRadius: 'xl' }}
-          postfix={
-            <Text variant="label" size="sm" whiteSpace="nowrap" color={colors.textTertiary}>
-              {baseIn ? quoteSymbol : baseSymbol}/{baseIn ? baseSymbol : quoteSymbol}
-            </Text>
-          }
+        <TokenInput
+          ctrSx={{ w: '100%', textColor: colors.textTertiary }}
+          topLeftLabel={t('common.base_token')}
+          token={baseToken ? wsolToSolToken(baseToken) : undefined}
+          value={tokenAmount.base}
+          onChange={(val) => setTokenAmount((prev) => ({ ...prev, base: val }))}
+          onTokenChange={(token) => handleSelectToken(token, 'input')}
         />
         <HStack spacing={1}>
           <Text fontWeight="400" fontSize="sm" color={colors.textTertiary}>
@@ -255,7 +232,7 @@ export default function Initialize({ isAmmV4 }: { isAmmV4: boolean }) {
           </Box>
         </HStack>
       </Flex>
-      {isAmmV4 ? null : (
+      {
         <Flex direction="column" w="full" align={'flex-start'} gap={3}>
           <Text fontWeight="medium" fontSize="sm">
             {t('field.fee_tier')}
@@ -320,7 +297,7 @@ export default function Initialize({ isAmmV4 }: { isAmmV4: boolean }) {
             />
           </Flex>
         </Flex>
-      )}
+      }
       {/* start time */}
       <Flex direction="column" w="full" gap={3}>
         <Text fontWeight="medium" textAlign="left" fontSize="sm">
@@ -431,15 +408,11 @@ export default function Initialize({ isAmmV4 }: { isAmmV4: boolean }) {
         )}
         <HStack color={colors.semanticWarning}>
           <Text fontWeight="medium" fontSize="sm" my="-2">
-            {isAmmV4
-              ? t('create_standard_pool.pool_creation_fee_note', { subject: '~0.45' })
-              : t('create_standard_pool.pool_creation_fee_note', { subject: '~0.2' })}
+            {t('create_standard_pool.pool_creation_fee_note', { subject: '~0.2' })}
           </Text>
           <QuestionToolTip
             iconType="question"
-            label={
-              isAmmV4 ? t('create_standard_pool.pool_ammv4_creation_fee_tooltip') : t('create_standard_pool.pool_creation_fee_tooltip')
-            }
+            label={t('create_standard_pool.pool_creation_fee_tooltip')}
           />
         </HStack>
         <Text color="red" my="-2">
